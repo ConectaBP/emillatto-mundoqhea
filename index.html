@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Etiquetas PWA para hacer instalable la web -->
+    <meta name="theme-color" content="#fdfbf7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Que hable el azúcar">
+    
+    <!-- Meta etiquetas para vista previa al compartir (WhatsApp, Facebook, etc.) -->
+    <meta property="og:title" content="Que hable el azúcar">
+    <meta property="og:description" content="Dulces historias viajeras. Descubre nuestro delicioso menú de helados y gomitas.">
+    <meta property="og:image" content="https://i.postimg.cc/mrDzpszg/Logos-Emilatto-y-Mundo-QHFA.png">
+    <meta property="og:image:secure_url" content="https://i.postimg.cc/mrDzpszg/Logos-Emilatto-y-Mundo-QHFA.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://quehableelazucar.app">
+    <meta property="og:type" content="website">
+    
+    <!-- Ícono para iOS y Android -->
+    <link rel="apple-touch-icon" href="https://i.postimg.cc/mrDzpszg/Logos-Emilatto-y-Mundo-QHFA.png">
+
+    <!-- Configuración PWA Nativa (El logo de tu App) -->
+    <link rel="manifest" id="manifest-link">
+    <script>
+        const manifest = {
+            "name": "Que hable el azúcar",
+            "short_name": "El Azúcar",
+            "start_url": ".",
+            "display": "standalone",
+            "background_color": "#fdfbf7",
+            "theme_color": "#fdfbf7",
+            "icons": [{
+                "src": "https://i.postimg.cc/mrDzpszg/Logos-Emilatto-y-Mundo-QHFA.png",
+                "sizes": "192x192 512x512",
+                "type": "image/png",
+                "purpose": "any maskable"
+            }]
+        };
+        document.getElementById('manifest-link').setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(manifest)));
+    </script>
+    
+    <title>Tarjeta Digital - Que hable el azúcar</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome para los íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts: 'Pacifico' para el toque dulce/divertido y 'Quicksand' para lectura clara -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Biblioteca para generar el código QR -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #fdfbf7;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Formas de fondo para dar textura (Blobs) */
+        .bg-blobs {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -1;
+            overflow: hidden;
+            background: radial-gradient(circle at top left, #fff0f5 0%, #fdfbf7 50%, #fef3c7 100%);
+        }
+        
+        .blob {
+            position: absolute;
+            filter: blur(60px);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float 10s ease-in-out infinite alternate;
+        }
+        
+        .blob-1 { top: -10%; left: -10%; width: 300px; height: 300px; background: #fbcfe8; } /* Rosa suave */
+        .blob-2 { top: 40%; right: -20%; width: 250px; height: 250px; background: #fde68a; animation-delay: -3s; } /* Miel/Ambar pastel */
+        .blob-3 { bottom: -10%; left: 20%; width: 350px; height: 350px; background: #e9d5ff; animation-delay: -5s; } /* Lila pastel */
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 50px) scale(1.1); }
+        }
+
+        .font-logo {
+            font-family: 'Pacifico', cursive;
+            letter-spacing: 1px;
+            font-weight: normal;
+        }
+
+        .pulse-effect {
+            animation: pulse 2.5s infinite;
+            box-shadow: 0 0 0 0 rgba(244, 114, 182, 0.4);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(244, 114, 182, 0.4); }
+            50% { transform: scale(1.02); box-shadow: 0 0 0 14px rgba(244, 114, 182, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(244, 114, 182, 0); }
+        }
+
+        .menu-scrollbar::-webkit-scrollbar { width: 5px; }
+        .menu-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .menu-scrollbar::-webkit-scrollbar-thumb { background-color: #fbcfe8; border-radius: 10px; }
+
+        /* Efecto Glassmorphism para los popups y tarjetas */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body class="md:flex md:items-center md:justify-center min-h-screen text-slate-700">
+
+    <!-- Fondo dinámico -->
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Contenedor Principal (Tarjeta Glass) -->
+    <div class="w-full md:max-w-sm glass-panel md:shadow-[0_8px_32px_rgba(251,207,232,0.4)] text-center md:rounded-[2rem] min-h-screen md:min-h-0 relative z-10 overflow-hidden flex flex-col">
+        
+        <!-- Portada (Proporción 16:9 Horizontal) -->
+        <div class="relative w-full aspect-video bg-white/40 flex items-center justify-center">
+            <img src="https://i.postimg.cc/mrDzpszg/Logos-Emilatto-y-Mundo-QHFA.png" alt="Portada Que Hable El Azúcar" class="w-full h-full object-contain p-2">
+        </div>
+
+        <div class="px-6 pb-8 pt-4 flex-grow flex flex-col">
+            <h1 class="font-logo text-3xl text-rose-500 tracking-wide drop-shadow-sm leading-tight">Que hable el azúcar</h1>
+            <p class="font-bold text-slate-500 mt-1 tracking-widest uppercase text-[10px]">Dulces historias viajeras</p>
+            
+            <!-- Botón principal (Pedir vía WhatsApp) -->
+            <a href="https://wa.me/573117223559?text=¡Hola!%20Quisiera%20hacer%20un%20pedido%20dulce." target="_blank" rel="noopener noreferrer" class="inline-block bg-rose-500 text-white font-bold py-3.5 px-8 rounded-full text-lg mt-6 mb-6 transition-all duration-300 hover:bg-rose-600 transform pulse-effect shadow-md w-full max-w-[280px] mx-auto border border-rose-400">
+                <i class="fab fa-whatsapp text-xl mr-2"></i>
+                Hacer Pedido
+            </a>
+
+            <p class="text-slate-400 text-[10px] mb-4 uppercase tracking-widest font-bold">Nuestro Menú</p>
+
+            <!-- Menú Principal -->
+            <div class="mb-4">
+                <div class="flex justify-center gap-4 items-start mb-6">
+                    <div class="text-center w-16 md:w-20 group">
+                        <button id="helados-btn" class="w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 shadow-sm mx-auto overflow-hidden p-1 border-none outline-none" style="background-color: #9CE4BE;" aria-label="Helados">
+                            <img src="https://i.postimg.cc/DyC8JzyC/Whats-App-Image-2026-11-14-at-12-05-19-AM.jpg" alt="Helados Emilatto" class="w-full h-full object-contain rounded-xl">
+                        </button>
+                        <p class="text-[11px] mt-2 text-slate-600 font-semibold">Helados</p>
+                    </div>
+                    <div class="text-center w-16 md:w-20 group">
+                        <button id="gomitas-btn" class="w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 shadow-sm mx-auto overflow-hidden p-1 border-none outline-none" style="background-color: #FC99DB;" aria-label="Gomitas">
+                            <img src="https://i.postimg.cc/3xSSc2rX/Logo-rosa-Mundo-QHFA.png" alt="Gomitas Mundo QHFA" class="w-full h-full object-contain rounded-xl">
+                        </button>
+                        <p class="text-[11px] mt-2 text-slate-600 font-semibold">Gomitas</p>
+                    </div>
+                    <div class="text-center w-16 md:w-20 group">
+                        <a href="https://www.google.com/maps/search/Mundo/@6.491600036621094,-74.40350341796875,17z?hl=es" target="_blank" class="bg-blue-100 text-blue-500 w-14 h-14 rounded-2xl flex items-center justify-center text-2xl transition-all duration-300 group-hover:scale-110 shadow-sm mx-auto hover:bg-blue-200" aria-label="Ubicación">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </a>
+                        <p class="text-xs mt-2 text-slate-800 font-bold">Ubicación</p>
+                    </div>
+                    <div class="text-center w-16 md:w-20 group">
+                        <a href="https://wa.me/573117223559" target="_blank" class="bg-green-100 text-green-500 w-14 h-14 rounded-2xl flex items-center justify-center text-2xl transition-all duration-300 group-hover:scale-110 shadow-sm mx-auto hover:bg-green-200" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <p class="text-xs mt-2 text-slate-800 font-bold">WhatsApp</p>
+                    </div>
+                </div>
+
+                <!-- Botones de Redes Sociales -->
+                <div class="flex justify-center gap-2 md:gap-4 items-start mb-6">
+                    <!-- IG Mundo QHEA -->
+                    <div class="text-center group w-16">
+                        <a href="https://instagram.com/mundoqhea" target="_blank" class="bg-pink-100 text-pink-500 w-11 h-11 rounded-full flex items-center justify-center text-lg transition-all duration-300 group-hover:scale-110 shadow-sm mx-auto hover:bg-pink-200 hover:text-pink-600" title="Instagram Mundo QHEA">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <p class="text-[10px] mt-1.5 text-slate-700 font-bold leading-tight">IG<br>@mundoqhea</p>
+                    </div>
+                    
+                    <!-- TikTok Mundo QHEA -->
+                    <div class="text-center group w-16">
+                        <a href="https://www.tiktok.com/@mundoqhea?_r=1&_t=ZS-9BNv21h6uv6" target="_blank" class="bg-slate-100 text-slate-700 w-11 h-11 rounded-full flex items-center justify-center text-lg transition-all duration-300 group-hover:scale-110 shadow-sm mx-auto hover:bg-slate-200 hover:text-slate-900" title="TikTok Mundo QHEA">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <p class="text-[10px] mt-1.5 text-slate-700 font-bold leading-tight">TikTok<br>@mundoqhea</p>
+                    </div>
+                    
+                    <!-- IG Emilatto -->
+                    <div class="text-center group w-16">
+                        <a href="https://instagram.com/emilatto_" target="_blank" class="bg-pink-100 text-pink-500 w-11 h-11 rounded-full flex items-center justify-center text-lg transition-all duration-300 group-hover:scale-110 shadow-sm mx-auto hover:bg-pink-200 hover:text-pink-600" title="Instagram Emilatto">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <p class="text-[10px] mt-1.5 text-slate-700 font-bold leading-tight">IG<br>@emilatto_</p>
+                    </div>
+                    
+                    <!-- TikTok Emilatto -->
+                    <div class="text-center group w-16">
+                        <a href="https://www.tiktok.com/@emilatto_?_r=1&_t=ZS-9BNv36IIg9R" target="_blank" class="bg-slate-100 text-slate-700 w-11 h-11 rounded-full flex items-center justify-center text-lg transition-all duration-300 group-hover:scale-110 shadow-sm mx-auto hover:bg-slate-200 hover:text-slate-900" title="TikTok Emilatto">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <p class="text-[10px] mt-1.5 text-slate-700 font-bold leading-tight">TikTok<br>@emilatto_</p>
+                    </div>
+                </div>
+
+                <!-- Acciones (Guardar, Compartir) -->
+                <div class="flex justify-center gap-4 items-start">
+                    <div class="text-center w-16 group">
+                        <a id="save-contact-btn" href="#" class="bg-indigo-100 text-indigo-500 w-10 h-10 rounded-xl flex items-center justify-center text-lg transition-all duration-300 group-hover:scale-110 shadow-sm mx-auto hover:bg-indigo-200 hover:text-indigo-600">
+                            <i class="fas fa-address-book"></i>
+                        </a>
+                        <p class="text-[10px] mt-1 text-slate-600 font-bold">Guardar</p>
+                    </div>
+                    <div class="text-center w-16 group">
+                        <button id="share-btn" class="bg-rose-100 text-rose-500 w-10 h-10 rounded-xl flex items-center justify-center text-lg transition-all duration-300 group-hover:scale-110 shadow-sm mx-auto hover:bg-rose-200 hover:text-rose-600">
+                            <i class="fas fa-share-nodes"></i>
+                        </button>
+                        <p class="text-[10px] mt-1 text-slate-600 font-bold">QR</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instalación y Footer -->
+            <div class="mt-auto">
+                <a href="#" id="install-btn" class="cursor-pointer text-xs text-rose-500 hover:text-rose-600 font-bold flex justify-center items-center gap-1 mb-4">
+                    <i class="fas fa-download"></i> ¿Cómo instalar nuestra app?
+                </a>
+                <div class="pt-3 border-t border-rose-100 flex flex-col items-center">
+                    <p class="text-[10px] text-slate-500 mb-2">Creado por <span class="text-slate-800 font-bold">Conecta+</span></p>
+                    <a href="https://wa.me/573125749480?text=¡Hola!%20Me%20encantó%20la%20tarjeta%20digital%20y%20quiero%20crear%20una%20para%20mi%20negocio." target="_blank" class="inline-flex items-center justify-center glass-panel text-slate-800 text-[10px] font-bold py-1 px-3 rounded-full hover:bg-white transition-all shadow-sm mb-3">
+                        <i class="fab fa-whatsapp text-green-500 mr-1 text-sm"></i> ¡Quiero el mío!
+                    </a>
+                    
+                    <!-- Contador de visitas -->
+                    <div class="flex flex-col items-center justify-center mt-1 mb-1">
+                        <img src="https://api.visitorbadge.io/api/visitors?path=quehableelazucar.app&label=VISITAS&labelColor=%23ffffff&countColor=%23fc99db" alt="Contador de visitas" class="h-6 shadow-sm rounded">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MODALES / POPUPS ================= -->
+    
+    <!-- Popup: Compartir -->
+    <div id="share-popup" class="fixed inset-0 bg-white/40 backdrop-blur-md flex items-center justify-center z-50 hidden p-4 transition-opacity">
+        <div class="glass-panel rounded-3xl shadow-xl p-8 max-w-xs w-full text-center relative text-slate-700">
+            <button id="close-share-popup-btn" class="absolute top-3 right-4 text-2xl text-slate-400 hover:text-rose-400 transition-colors">&times;</button>
+            <h3 class="text-2xl font-bold mb-1 font-logo text-rose-500">Comparte dulzura</h3>
+            <p class="text-xs text-slate-500 mb-5">Escanea el código para compartirnos</p>
+            
+            <div id="qrcode-container" class="flex justify-center mb-5 bg-white p-3 rounded-xl mx-auto w-max shadow-sm border border-rose-50"></div>
+            
+            <input type="text" id="share-url" class="w-full glass-panel text-slate-600 text-center rounded-xl p-2.5 text-xs focus:outline-none focus:ring-1 focus:ring-rose-300 transition-all" readonly>
+            <p class="text-[9px] text-slate-400 mt-2">Toca el enlace para copiar</p>
+        </div>
+    </div>
+
+    <!-- Popup: Helados (EMILATTO COMPLETO) -->
+    <div id="helados-popup" class="fixed inset-0 bg-white/70 backdrop-blur-xl z-50 hidden p-4 text-slate-700">
+        <div class="w-full h-full max-w-md mx-auto relative flex flex-col glass-panel rounded-[2rem] overflow-hidden shadow-2xl">
+            <div class="flex justify-between items-center py-4 px-5 border-b border-white/50 shrink-0 bg-white/30">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-ice-cream text-rose-400 text-2xl"></i>
+                    <h2 class="font-logo text-3xl text-rose-500 tracking-wide mt-1">Menú Emilatto</h2>
+                </div>
+                <button id="close-helados-popup-btn" class="text-2xl text-slate-400 hover:text-rose-500 transition-colors z-10 w-8 h-8 flex items-center justify-center rounded-full bg-white/50">&times;</button>
+            </div>
+            
+            <div class="overflow-y-auto menu-scrollbar flex-grow py-4 px-4">
+                
+                <!-- Sección CONCHAS -->
+                <div class="mb-6">
+                    <h3 class="font-logo text-2xl text-rose-400 mb-3 border-b border-rose-100 pb-1">Conchas</h3>
+                    <div class="grid grid-cols-1 gap-2">
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Concha Chocolate</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 17.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Concha%20Chocolate%20($17.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Concha Oreo</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 17.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Concha%20Oreo%20($17.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Concha Queso</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 17.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Concha%20Queso%20($17.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Concha Chocorramito</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 17.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Concha%20Chocorramito%20($17.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Concha Milo</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 17.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Concha%20Milo%20($17.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Concha Capricho</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 17.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Concha%20Capricho%20($17.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Concha Choco Fresa</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 17.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Concha%20Choco%20Fresa%20($17.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Concha Frutal</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 17.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Concha%20Frutal%20($17.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Concha Fuego-Latto</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 17.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Concha%20Fuego-Latto%20($17.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección DE LA CASA -->
+                <div class="mb-6">
+                    <h3 class="font-logo text-2xl text-rose-400 mb-3 border-b border-rose-100 pb-1">De La Casa</h3>
+                    <div class="grid grid-cols-1 gap-2">
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Emilatto</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 12.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Emilatto%20($12.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Could Latto</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 17.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Could%20Latto%20($17.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Waffle Latto</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 15.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Waffle%20Latto%20($15.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Bubble Latto</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 25.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Bubble%20Latto%20($25.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Malteada</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 17.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Malteada%20($17.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Cake Pops</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 15.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20unos%20Cake%20Pops%20($15.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Latto Antojo</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 18.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Latto%20Antojo%20($18.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Bowl Churros</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 17.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Bowl%20Churros%20($17.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Azai Bowl</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 22.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Azai%20Bowl%20($22.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Nube de Café</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 8.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Nube%20de%20Café%20($8.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección BANANAS -->
+                <div class="mb-6">
+                    <h3 class="font-logo text-2xl text-rose-400 mb-3 border-b border-rose-100 pb-1">Bananas</h3>
+                    <div class="grid grid-cols-1 gap-2">
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Sencilla</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 15.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Banana%20Sencilla%20($15.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Especial</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 17.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Banana%20Especial%20($17.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Premium</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 25.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Banana%20Premium%20($25.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Submarino</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 40.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Banana%20Submarino%20($40.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección SALPICÓN -->
+                <div class="mb-6">
+                    <h3 class="font-logo text-2xl text-rose-400 mb-3 border-b border-rose-100 pb-1">Salpicón</h3>
+                    <div class="grid grid-cols-1 gap-2">
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Pequeño</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 12.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Salpicón%20Pequeño%20($12.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Mediano</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 14.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Salpicón%20Mediano%20($14.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Grande</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 17.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Salpicón%20Grande%20($17.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección INFANTILES -->
+                <div class="mb-6">
+                    <h3 class="font-logo text-2xl text-rose-400 mb-3 border-b border-rose-100 pb-1">Infantiles</h3>
+                    <div class="grid grid-cols-1 gap-2">
+                        <!-- Todos a 15.000 -->
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Brownie Infantil</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 15.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Brownie%20Infantil%20($15.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Búho</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 15.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Búho%20($15.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Pulpo</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 15.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Pulpo%20($15.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Ratón</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 15.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Ratón%20($15.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Gusano</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 15.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Gusano%20($15.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Pollito</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 15.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Pollito%20($15.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Vaca</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 15.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Vaca%20($15.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Tortuga</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 15.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Tortuga%20($15.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Panda</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 15.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Panda%20($15.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Capibara</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 15.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Capibara%20($15.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Marrano</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 15.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Marrano%20($15.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Mariposa</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 15.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Mariposa%20($15.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección TRADICIONALES -->
+                <div class="mb-6">
+                    <h3 class="font-logo text-2xl text-rose-400 mb-3 border-b border-rose-100 pb-1">Tradicionales</h3>
+                    <div class="grid grid-cols-1 gap-2">
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Vaso 1 Bola</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 4.500</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Vaso%20de%201%20Bola%20($4.500)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Vaso 2 Bolas</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 6.500</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Vaso%20de%202%20Bolas%20($6.500)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Cono 1 Bola</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 5.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Cono%20de%201%20Bola%20($5.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Cono 2 Bolas</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 8.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Cono%20de%202%20Bolas%20($8.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Concha 2 Bolas</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 10.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Concha%20de%202%20Bolas%20($10.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Cucurucho 1 Bola</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 6.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Cucurucho%20de%201%20Bola%20($6.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Cucurucho 2 Bolas</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 9.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Cucurucho%20de%202%20Bolas%20($9.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección OBLEAS -->
+                <div class="mb-6">
+                    <h3 class="font-logo text-2xl text-rose-400 mb-3 border-b border-rose-100 pb-1">Obleas</h3>
+                    <div class="grid grid-cols-1 gap-2">
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Oblea Tradicional</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 5.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Oblea%20Tradicional%20($5.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Oblea Cuchareable</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 12.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Oblea%20Cuchareable%20($12.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Oblea Frutal</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 14.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Oblea%20Frutal%20($14.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección SALADITOS -->
+                <div class="mb-6">
+                    <h3 class="font-logo text-2xl text-rose-400 mb-3 border-b border-rose-100 pb-1">Saladitos</h3>
+                    <div class="grid grid-cols-1 gap-2">
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">S. Jamón y Queso</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 8.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20S.%20Jamón%20y%20Queso%20($8.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">S. Ranchero</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 15.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20S.%20Ranchero%20($15.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">S. Pollo</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 18.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20S.%20Pollo%20($18.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Canasta Pollo</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 10.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Canasta%20Pollo%20($10.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Canasta Ranchera</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 10.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Canasta%20Ranchera%20($10.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Burrito</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 20.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Burrito%20($20.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección DORILATTOS -->
+                <div class="mb-6">
+                    <h3 class="font-logo text-2xl text-rose-400 mb-3 border-b border-rose-100 pb-1">Dorilattos</h3>
+                    <div class="grid grid-cols-1 gap-2">
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Dorilattos</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 20.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20unos%20Dorilattos%20($20.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección ENSALADAS -->
+                <div class="mb-6">
+                    <h3 class="font-logo text-2xl text-rose-400 mb-3 border-b border-rose-100 pb-1">Ensaladas</h3>
+                    <div class="grid grid-cols-1 gap-2">
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Ensalada Pequeña</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 20.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Ensalada%20Pequeña%20($20.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Ensalada Mediana</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 24.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Ensalada%20Mediana%20($24.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Ensalada Grande</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 27.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Ensalada%20Grande%20($27.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección BEBIDAS -->
+                <div class="mb-6">
+                    <h3 class="font-logo text-2xl text-rose-400 mb-3 border-b border-rose-100 pb-1">Bebidas</h3>
+                    <div class="grid grid-cols-1 gap-2">
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Jugo en agua</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 8.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Jugo%20en%20agua%20($8.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Jugo en leche</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 10.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Jugo%20en%20leche%20($10.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Cerezada</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 15.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Cerezada%20($15.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Milo frío</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 10.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Milo%20frío%20($10.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Milo caliente</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 12.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Milo%20caliente%20($12.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Agua mini</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 1.500</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Agua%20mini%20($1.500)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Bot. Agua</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 3.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Bot.%20Agua%20($3.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Bot agua gas</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 3.500</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Bot%20agua%20gas%20($3.500)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Quatro mini</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 2.500</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Quatro%20mini%20($2.500)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Mangokuyá</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 12.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Mangokuyá%20($12.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Miche - Helado</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 10.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Miche%20-%20Helado%20($10.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Soda Michelada</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 8.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Soda%20Michelada%20($8.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Ginger</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 3.500</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Ginger%20($3.500)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Coca cola lata</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 3.500</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Coca%20cola%20lata%20($3.500)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Soda</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 3.500</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Soda%20($3.500)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Coca cola flexi</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 4.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Coca%20cola%20flexi%20($4.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Quatro flexi</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 4.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Quatro%20flexi%20($4.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Chamoyada</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 10.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Chamoyada%20($10.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Coca cola mini</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 2.500</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Coca%20cola%20mini%20($2.500)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Brisa Dorada</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 8.000</p></div>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Brisa%20Dorada%20($8.000)." target="_blank" class="bg-rose-100 text-rose-500 w-10 h-10 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm flex-shrink-0"><i class="fab fa-whatsapp text-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección ADICIONALES (IMPORTANTE) -->
+                <div class="mb-4">
+                    <h3 class="font-logo text-2xl text-rose-400 mb-3 border-b border-rose-100 pb-1">Importante / Adiciones</h3>
+                    <div class="grid grid-cols-1 gap-2">
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Domicilios</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 3.000</p></div>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Adiciones</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 3.000</p></div>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Bowl Empaque</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 2.000</p></div>
+                        </div>
+                        <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                            <div><h4 class="font-bold text-[15px] text-slate-700 leading-tight">Bola de Helado</h4><p class="text-rose-500 font-bold mt-0.5 text-sm">$ 2.000</p></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup: Gomitas -->
+    <div id="gomitas-popup" class="fixed inset-0 bg-white/70 backdrop-blur-xl z-50 hidden p-4 text-slate-700">
+        <div class="w-full h-full max-w-md mx-auto relative flex flex-col glass-panel rounded-[2rem] overflow-hidden shadow-2xl">
+            <div class="flex justify-between items-center py-4 px-5 border-b border-white/50 shrink-0 bg-white/30">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-candy-cane text-pink-400 text-2xl"></i>
+                    <h2 class="font-logo text-3xl text-pink-500 tracking-wide mt-1">Gomitas</h2>
+                </div>
+                <div class="flex items-center gap-2 z-10">
+                    <!-- Botón del Carrito en el Encabezado -->
+                    <button id="open-cart-btn" class="relative text-pink-500 w-9 h-9 flex items-center justify-center rounded-full bg-white/70 hover:bg-pink-100 transition-colors shadow-sm" title="Ver Carrito">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span id="cart-badge" class="absolute -top-1 -right-1 bg-red-500 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden transition-transform duration-200">0</span>
+                    </button>
+                    <button id="close-gomitas-popup-btn" class="text-2xl text-slate-400 hover:text-pink-500 transition-colors w-9 h-9 flex items-center justify-center rounded-full bg-white/50">&times;</button>
+                </div>
+            </div>
+            
+            <div class="overflow-y-auto menu-scrollbar flex-grow py-6 px-4">
+                <p class="text-sm text-slate-500 mb-6 font-medium">El toque dulce que alegra tu día con nuestras delicias en gomitas.</p>
+                
+                <div class="space-y-4">
+                    <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                        <div class="flex items-center gap-3">
+                            <img src="https://i.postimg.cc/50Pz7Hk6/Whats-App-Image-2026-11-11-at-9-09-24-PM.jpg" alt="Cono de gomitas" class="w-16 h-16 rounded-xl object-cover shadow-sm border border-white flex-shrink-0">
+                            <div>
+                                <h4 class="font-bold text-base text-slate-800 leading-tight">Cono de gomitas</h4>
+                                <p class="text-pink-500 font-bold mt-0.5 text-sm">$ 30.000</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1.5 flex-shrink-0">
+                            <button onclick="addToCart('Cono de gomitas', 30000, 'https://i.postimg.cc/50Pz7Hk6/Whats-App-Image-2026-11-11-at-9-09-24-PM.jpg')" class="bg-pink-50 text-pink-400 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Agregar al carrito">
+                                <i class="fas fa-cart-plus text-sm"></i>
+                            </button>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Cono%20de%20gomitas%20($30.000)." target="_blank" class="bg-pink-100 text-pink-500 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Pedir rápido">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                        <div class="flex items-center gap-3">
+                            <img src="https://i.postimg.cc/q7JgPJK2/Whats-App-Image-2026-11-12-at-9-12-35-PM-(1).jpg" alt="Torta de gomitas" class="w-16 h-16 rounded-xl object-cover shadow-sm border border-white flex-shrink-0" onerror="this.src='https://i.postimg.cc/q7JgPJK2/Whats-App-Image-2026-11-11-at-9-12-35-PM-(1).jpg'">
+                            <div>
+                                <h4 class="font-bold text-base text-slate-800 leading-tight">Torta de gomitas</h4>
+                                <p class="text-slate-500 text-[10px] mt-0.5 leading-tight">1 kg de gomitas surtidas 🌈</p>
+                                <p class="text-pink-500 font-bold mt-0.5 text-sm">$ 65.000</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1.5 flex-shrink-0">
+                            <button onclick="addToCart('Torta de gomitas', 65000, 'https://i.postimg.cc/q7JgPJK2/Whats-App-Image-2026-11-12-at-9-12-35-PM-(1).jpg')" class="bg-pink-50 text-pink-400 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Agregar al carrito">
+                                <i class="fas fa-cart-plus text-sm"></i>
+                            </button>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Torta%20de%20gomitas%20de%201kg%20($65.000)." target="_blank" class="bg-pink-100 text-pink-500 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Pedir rápido">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                        <div class="flex items-center gap-3">
+                            <img src="https://i.postimg.cc/0Q3GfWQf/Whats-App-Image-2026-11-11-at-9-15-21-PM.jpg" alt="Mini torta" class="w-16 h-16 rounded-xl object-cover shadow-sm border border-white flex-shrink-0">
+                            <div>
+                                <h4 class="font-bold text-base text-slate-800 leading-tight">Mini torta</h4>
+                                <p class="text-pink-500 font-bold mt-0.5 text-sm">$ 30.000</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1.5 flex-shrink-0">
+                            <button onclick="addToCart('Mini torta', 30000, 'https://i.postimg.cc/0Q3GfWQf/Whats-App-Image-2026-11-11-at-9-15-21-PM.jpg')" class="bg-pink-50 text-pink-400 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Agregar al carrito">
+                                <i class="fas fa-cart-plus text-sm"></i>
+                            </button>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Mini%20torta%20de%20gomitas%20($30.000)." target="_blank" class="bg-pink-100 text-pink-500 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Pedir rápido">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- NUEVOS PRODUCTOS -->
+                    <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                        <div class="flex items-center gap-3">
+                            <img src="https://i.postimg.cc/MTq4J9S9/Whats-App-Image-2026-11-13-at-8-11-55-PM-(5).jpg" alt="Vaso dulcero" class="w-16 h-16 rounded-xl object-cover shadow-sm border border-white flex-shrink-0">
+                            <div>
+                                <h4 class="font-bold text-base text-slate-800 leading-tight">Vaso dulcero</h4>
+                                <p class="text-pink-500 font-bold mt-0.5 text-sm">$ 25.000</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1.5 flex-shrink-0">
+                            <button onclick="addToCart('Vaso dulcero', 25000, 'https://i.postimg.cc/MTq4J9S9/Whats-App-Image-2026-11-13-at-8-11-55-PM-(5).jpg')" class="bg-pink-50 text-pink-400 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Agregar al carrito">
+                                <i class="fas fa-cart-plus text-sm"></i>
+                            </button>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Vaso%20dulcero%20($25.000)." target="_blank" class="bg-pink-100 text-pink-500 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Pedir rápido">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                        <div class="flex items-center gap-3">
+                            <img src="https://i.postimg.cc/JhWYjpGX/Whats-App-Image-2026-11-13-at-8-11-55-PM-(4).jpg" alt="Bolsa mix" class="w-16 h-16 rounded-xl object-cover shadow-sm border border-white flex-shrink-0">
+                            <div>
+                                <h4 class="font-bold text-base text-slate-800 leading-tight">Bolsa mix</h4>
+                                <p class="text-pink-500 font-bold mt-0.5 text-sm">$ 15.000</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1.5 flex-shrink-0">
+                            <button onclick="addToCart('Bolsa mix', 15000, 'https://i.postimg.cc/JhWYjpGX/Whats-App-Image-2026-11-13-at-8-11-55-PM-(4).jpg')" class="bg-pink-50 text-pink-400 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Agregar al carrito">
+                                <i class="fas fa-cart-plus text-sm"></i>
+                            </button>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Bolsa%20mix%20($15.000)." target="_blank" class="bg-pink-100 text-pink-500 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Pedir rápido">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                        <div class="flex items-center gap-3">
+                            <img src="https://i.postimg.cc/8zLtkLwx/Whats-App-Image-2026-11-13-at-8-11-55-PM-(3).jpg" alt="Box puro dulce" class="w-16 h-16 rounded-xl object-cover shadow-sm border border-white flex-shrink-0">
+                            <div>
+                                <h4 class="font-bold text-base text-slate-800 leading-tight">Box puro dulce</h4>
+                                <p class="text-slate-500 text-[10px] mt-0.5 leading-tight">15 gomitas a tu elección (solo maxi goma)</p>
+                                <p class="text-pink-500 font-bold mt-0.5 text-sm">$ 60.000</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1.5 flex-shrink-0">
+                            <button onclick="addToCart('Box puro dulce', 60000, 'https://i.postimg.cc/8zLtkLwx/Whats-App-Image-2026-11-13-at-8-11-55-PM-(3).jpg')" class="bg-pink-50 text-pink-400 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Agregar al carrito">
+                                <i class="fas fa-cart-plus text-sm"></i>
+                            </button>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Box%20puro%20dulce%20($60.000)." target="_blank" class="bg-pink-100 text-pink-500 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Pedir rápido">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                        <div class="flex items-center gap-3">
+                            <img src="https://i.postimg.cc/fyXB3XDx/Whats-App-Image-2026-11-13-at-8-11-55-PM-(2).jpg" alt="Caja dulcera + caricatura" class="w-16 h-16 rounded-xl object-cover shadow-sm border border-white flex-shrink-0">
+                            <div>
+                                <h4 class="font-bold text-base text-slate-800 leading-tight">Caja dulcera + caricatura</h4>
+                                <p class="text-slate-500 text-[10px] mt-0.5 leading-tight">Convierte tu foto en una caricatura con tus dulces</p>
+                                <p class="text-pink-500 font-bold mt-0.5 text-sm">$ 30.000</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1.5 flex-shrink-0">
+                            <button onclick="addToCart('Caja dulcera + caricatura', 30000, 'https://i.postimg.cc/fyXB3XDx/Whats-App-Image-2026-11-13-at-8-11-55-PM-(2).jpg')" class="bg-pink-50 text-pink-400 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Agregar al carrito">
+                                <i class="fas fa-cart-plus text-sm"></i>
+                            </button>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Caja%20dulcera%20con%20caricatura%20($30.000)." target="_blank" class="bg-pink-100 text-pink-500 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Pedir rápido">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                        <div class="flex items-center gap-3">
+                            <img src="https://i.postimg.cc/mgVVFTWs/Whats-App-Image-2026-11-13-at-8-11-55-PM-(1).jpg" alt="Encanto de amor" class="w-16 h-16 rounded-xl object-cover shadow-sm border border-white flex-shrink-0">
+                            <div>
+                                <h4 class="font-bold text-[15px] text-slate-700 font-logo leading-tight">Encanto de amor</h4>
+                                <p class="text-slate-500 text-[10px] mt-0.5 leading-tight">Corazón de gomitas y tarjeta personalizable</p>
+                                <p class="text-pink-500 font-bold mt-0.5 text-sm">$ 7.000</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1.5 flex-shrink-0">
+                            <button onclick="addToCart('Encanto de amor', 7000, 'https://i.postimg.cc/mgVVFTWs/Whats-App-Image-2026-11-13-at-8-11-55-PM-(1).jpg')" class="bg-pink-50 text-pink-400 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Agregar al carrito">
+                                <i class="fas fa-cart-plus text-sm"></i>
+                            </button>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Encanto%20de%20amor%20($7.000)." target="_blank" class="bg-pink-100 text-pink-500 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Pedir rápido">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- NUEVOS AGREGADOS -->
+                    <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                        <div class="flex items-center gap-3">
+                            <img src="https://i.postimg.cc/4yLVxxhh/Whats-App-Image-2026-11-13-at-8-11-55-PM.jpg" alt="Cupido de amor" class="w-16 h-16 rounded-xl object-cover shadow-sm border border-white flex-shrink-0">
+                            <div>
+                                <h4 class="font-bold text-[15px] text-slate-700 leading-tight">Cupido de amor</h4>
+                                <p class="text-slate-500 text-[10px] mt-0.5 leading-tight">Estuche de gomitas, caja reutilizable</p>
+                                <p class="text-pink-500 font-bold mt-0.5 text-sm">$ 20.000</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1.5 flex-shrink-0">
+                            <button onclick="addToCart('Cupido de amor', 20000, 'https://i.postimg.cc/4yLVxxhh/Whats-App-Image-2026-11-13-at-8-11-55-PM.jpg')" class="bg-pink-50 text-pink-400 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Agregar al carrito">
+                                <i class="fas fa-cart-plus text-sm"></i>
+                            </button>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Cupido%20de%20amor%20($20.000)." target="_blank" class="bg-pink-100 text-pink-500 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Pedir rápido">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                        <div class="flex items-center gap-3">
+                            <img src="https://i.postimg.cc/fLHJxgTy/Whats-App-Image-2026-11-13-at-8-11-54-PM-(5).jpg" alt="Presentación estrella" class="w-16 h-16 rounded-xl object-cover shadow-sm border border-white flex-shrink-0">
+                            <div>
+                                <h4 class="font-bold text-[15px] text-slate-700 leading-tight">Presentación estrella</h4>
+                                <p class="text-pink-500 font-bold mt-0.5 text-sm">$ 20.000</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1.5 flex-shrink-0">
+                            <button onclick="addToCart('Presentación estrella', 20000, 'https://i.postimg.cc/fLHJxgTy/Whats-App-Image-2026-11-13-at-8-11-54-PM-(5).jpg')" class="bg-pink-50 text-pink-400 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Agregar al carrito">
+                                <i class="fas fa-cart-plus text-sm"></i>
+                            </button>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20una%20Presentación%20estrella%20($20.000)." target="_blank" class="bg-pink-100 text-pink-500 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Pedir rápido">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                        <div class="flex items-center gap-3">
+                            <img src="https://i.postimg.cc/zBffXSwM/Whats-App-Image-2026-11-13-at-8-11-54-PM-(4).jpg" alt="Bowl mediano" class="w-16 h-16 rounded-xl object-cover shadow-sm border border-white flex-shrink-0">
+                            <div>
+                                <h4 class="font-bold text-[15px] text-slate-700 leading-tight">Bowl mediano</h4>
+                                <p class="text-pink-500 font-bold mt-0.5 text-sm">$ 20.000</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1.5 flex-shrink-0">
+                            <button onclick="addToCart('Bowl mediano', 20000, 'https://i.postimg.cc/zBffXSwM/Whats-App-Image-2026-11-13-at-8-11-54-PM-(4).jpg')" class="bg-pink-50 text-pink-400 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Agregar al carrito">
+                                <i class="fas fa-cart-plus text-sm"></i>
+                            </button>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Bowl%20mediano%20($20.000)." target="_blank" class="bg-pink-100 text-pink-500 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Pedir rápido">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                        <div class="flex items-center gap-3">
+                            <img src="https://i.postimg.cc/bJMqYXwH/Whats-App-Image-2026-11-13-at-8-11-54-PM-(3).jpg" alt="Botiquín de amor" class="w-16 h-16 rounded-xl object-cover shadow-sm border border-white flex-shrink-0">
+                            <div>
+                                <h4 class="font-bold text-[15px] text-slate-700 leading-tight">Botiquín de amor</h4>
+                                <p class="text-pink-500 font-bold mt-0.5 text-sm">$ 80.000</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1.5 flex-shrink-0">
+                            <button onclick="addToCart('Botiquín de amor', 80000, 'https://i.postimg.cc/bJMqYXwH/Whats-App-Image-2026-11-13-at-8-11-54-PM-(3).jpg')" class="bg-pink-50 text-pink-400 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Agregar al carrito">
+                                <i class="fas fa-cart-plus text-sm"></i>
+                            </button>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Botiquín%20de%20amor%20($80.000)." target="_blank" class="bg-pink-100 text-pink-500 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Pedir rápido">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                        <div class="flex items-center gap-3">
+                            <img src="https://i.postimg.cc/y8Pg1d4n/Whats-App-Image-2026-11-13-at-8-11-54-PM-(2).jpg" alt="Sonrisitas dulces" class="w-16 h-16 rounded-xl object-cover shadow-sm border border-white flex-shrink-0">
+                            <div>
+                                <h4 class="font-bold text-[15px] text-slate-700 leading-tight">Sonrisitas dulces</h4>
+                                <p class="text-slate-500 text-[10px] mt-0.5 leading-tight">Box 5 divisiones, gomitas a elección y sticker</p>
+                                <p class="text-pink-500 font-bold mt-0.5 text-sm">$ 40.000</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1.5 flex-shrink-0">
+                            <button onclick="addToCart('Sonrisitas dulces', 40000, 'https://i.postimg.cc/y8Pg1d4n/Whats-App-Image-2026-11-13-at-8-11-54-PM-(2).jpg')" class="bg-pink-50 text-pink-400 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Agregar al carrito">
+                                <i class="fas fa-cart-plus text-sm"></i>
+                            </button>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20unas%20Sonrisitas%20dulces%20($40.000)." target="_blank" class="bg-pink-100 text-pink-500 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Pedir rápido">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                        <div class="flex items-center gap-3">
+                            <img src="https://i.postimg.cc/xd8C933g/Whats-App-Image-2026-11-13-at-8-11-54-PM-(1).jpg" alt="Box grande" class="w-16 h-16 rounded-xl object-cover shadow-sm border border-white flex-shrink-0">
+                            <div>
+                                <h4 class="font-bold text-[15px] text-slate-700 leading-tight">Box grande</h4>
+                                <p class="text-slate-500 text-[10px] mt-0.5 leading-tight">Gomitas a tu elección</p>
+                                <p class="text-pink-500 font-bold mt-0.5 text-sm">$ 30.000</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1.5 flex-shrink-0">
+                            <button onclick="addToCart('Box grande', 30000, 'https://i.postimg.cc/xd8C933g/Whats-App-Image-2026-11-13-at-8-11-54-PM-(1).jpg')" class="bg-pink-50 text-pink-400 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Agregar al carrito">
+                                <i class="fas fa-cart-plus text-sm"></i>
+                            </button>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Box%20grande%20($30.000)." target="_blank" class="bg-pink-100 text-pink-500 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Pedir rápido">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/60 rounded-2xl p-3 border border-white/40 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                        <div class="flex items-center gap-3">
+                            <img src="https://i.postimg.cc/xTPTH4x0/Whats-App-Image-2026-11-13-at-8-11-53-PM.jpg" alt="Te quiero dulce" class="w-16 h-16 rounded-xl object-cover shadow-sm border border-white flex-shrink-0">
+                            <div>
+                                <h4 class="font-bold text-[15px] text-slate-700 leading-tight">Te quiero dulce</h4>
+                                <p class="text-slate-500 text-[10px] mt-0.5 leading-tight">Empaque corazón 5 compartimientos</p>
+                                <p class="text-pink-500 font-bold mt-0.5 text-sm">$ 50.000</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1.5 flex-shrink-0">
+                            <button onclick="addToCart('Te quiero dulce', 50000, 'https://i.postimg.cc/xTPTH4x0/Whats-App-Image-2026-11-13-at-8-11-53-PM.jpg')" class="bg-pink-50 text-pink-400 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Agregar al carrito">
+                                <i class="fas fa-cart-plus text-sm"></i>
+                            </button>
+                            <a href="https://wa.me/573117223559?text=¡Hola!%20Quiero%20pedir%20un%20Te%20quiero%20dulce%20($50.000)." target="_blank" class="bg-pink-100 text-pink-500 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Pedir rápido">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup: Carrito -->
+    <div id="cart-popup" class="fixed inset-0 bg-white/70 backdrop-blur-xl z-50 hidden p-4 text-slate-700">
+        <div class="w-full h-full max-w-md mx-auto relative flex flex-col glass-panel rounded-[2rem] overflow-hidden shadow-2xl border-2 border-pink-200/50">
+            <div class="flex justify-between items-center py-4 px-5 border-b border-white/50 shrink-0 bg-white/30">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-shopping-basket text-pink-400 text-2xl"></i>
+                    <h2 class="font-logo text-2xl text-pink-500 tracking-wide mt-1">Tu Pedido</h2>
+                </div>
+                <button id="close-cart-popup-btn" class="text-2xl text-slate-400 hover:text-pink-500 transition-colors z-10 w-8 h-8 flex items-center justify-center rounded-full bg-white/50 shadow-sm">&times;</button>
+            </div>
+            
+            <div class="overflow-y-auto menu-scrollbar flex-grow py-4 px-4 bg-white/10">
+                <div id="cart-items" class="mb-4">
+                    <!-- Los productos del carrito se renderizan aquí -->
+                </div>
+            </div>
+            
+            <div class="p-5 bg-white/80 border-t border-white/50 shrink-0 backdrop-blur-md rounded-b-[2rem]">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="font-bold text-slate-500">Total a pagar:</span>
+                    <span id="cart-total" class="font-bold text-xl text-pink-500">$ 0</span>
+                </div>
+                <button id="checkout-btn" class="w-full bg-pink-500 text-white font-bold py-3.5 px-4 rounded-xl text-sm transition-all duration-300 hover:bg-pink-600 shadow-md flex items-center justify-center gap-2 opacity-50 pointer-events-none">
+                    <i class="fab fa-whatsapp text-lg"></i> Pedir carrito por WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup: Instalación PWA -->
+    <div id="install-popup" class="fixed inset-0 bg-white/40 backdrop-blur-md flex items-center justify-center z-50 hidden p-4 transition-opacity">
+        <div class="glass-panel rounded-3xl shadow-xl p-6 max-w-sm w-full relative text-slate-700">
+            <button id="close-install-popup-btn" class="absolute top-3 right-4 text-2xl text-slate-400 hover:text-rose-400 transition-colors">&times;</button>
+            
+            <div class="text-center mb-5 mt-2">
+                <div class="w-12 h-12 bg-gradient-to-tr from-rose-300 to-pink-300 rounded-full flex items-center justify-center text-white mx-auto mb-3 shadow-sm">
+                    <i class="fas fa-mobile-alt text-xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold font-logo text-rose-500 tracking-wide">Instalar App</h3>
+                <p class="text-xs text-slate-500 mt-1">Lleva el mundo dulce siempre contigo</p>
+            </div>
+            
+            <div class="mb-3 bg-white/50 p-4 rounded-2xl border border-white">
+                <h4 class="font-bold text-sm mb-2 flex items-center text-slate-600"><i class="fab fa-apple mr-2 text-slate-400"></i> En iOS (Safari)</h4>
+                <ol class="list-decimal list-inside text-xs text-slate-500 space-y-2 font-medium">
+                    <li>Toca el botón <strong>Compartir</strong> <i class="fas fa-share-from-square mx-1"></i>.</li>
+                    <li>Desliza hacia arriba y elige <strong class="text-rose-500">"Agregar a inicio"</strong>.</li>
+                    <li>Toca en <strong class="text-rose-500">"Agregar"</strong> arriba.</li>
+                </ol>
+            </div>
+            
+            <div class="bg-white/50 p-4 rounded-2xl border border-white">
+                <h4 class="font-bold text-sm mb-2 flex items-center text-slate-600"><i class="fab fa-android mr-2 text-green-500"></i> En Android (Chrome)</h4>
+                <ol class="list-decimal list-inside text-xs text-slate-500 space-y-2 font-medium">
+                    <li>Toca los <strong>tres puntos</strong> <i class="fas fa-ellipsis-v mx-1"></i>.</li>
+                    <li>Elige <strong class="text-rose-500">"Agregar a la pantalla principal"</strong>.</li>
+                    <li>Confirma tocando <strong class="text-rose-500">"Instalar"</strong>.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificación / Banner de Invitación a Instalar -->
+    <div id="install-banner" class="fixed bottom-4 left-4 right-4 max-w-sm mx-auto glass-panel p-4 rounded-2xl shadow-2xl z-50 hidden border border-rose-200 transform translate-y-10 opacity-0 transition-all duration-500 flex items-center justify-between gap-3 bg-white/9onta">
+        <div class="flex items-center gap-3 text-left">
+            <div class="w-10 h-10 bg-rose-500 text-white rounded-xl flex items-center justify-center shrink-0 shadow-sm">
+                <i class="fas fa-gift text-lg"></i>
+            </div>
+            <div>
+                <h4 class="font-bold text-xs text-slate-800">¡Lleva nuestra app contigo!</h4>
+                <p class="text-[11px] text-slate-500 leading-tight">Instálala en tu pantalla de inicio.</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+            <button id="accept-install-banner" class="bg-rose-500 hover:bg-rose-600 text-white text-xs font-bold px-3 py-2 rounded-xl transition-all shadow-sm">Instalar</button>
+            <button id="close-install-banner" class="text-slate-400 hover:text-slate-600 p-1"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <script>
+        const openPopup = (popupId) => document.getElementById(popupId).classList.remove('hidden');
+        const closePopup = (popupId) => document.getElementById(popupId).classList.add('hidden');
+
+        // PWA Native Install Logic
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevenir que Chrome muestre el prompt automático
+            e.preventDefault();
+            // Guardar el evento para dispararlo luego con nuestro botón
+            deferredPrompt = e;
+        });
+
+        // Mostrar notificación de instalación automáticamente a los 2 segundos de abrir la página
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const banner = document.getElementById('install-banner');
+                if (banner && !localStorage.getItem('install_prompt_closed')) {
+                    banner.classList.remove('hidden');
+                    setTimeout(() => {
+                        banner.classList.remove('translate-y-10', 'opacity-0');
+                    }, 50);
+                }
+            }, 2000);
+        });
+
+        document.getElementById('accept-install-banner')?.addEventListener('click', async () => {
+            document.getElementById('install-banner').classList.add('hidden');
+            if (deferredPrompt) {
+                // Lanzar el prompt nativo de Android/Chrome
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                deferredPrompt = null;
+            } else {
+                // Mostrar instrucciones manuales (iOS Safari o si ya está instalada)
+                openPopup('install-popup');
+            }
+        });
+
+        document.getElementById('close-install-banner')?.addEventListener('click', () => {
+            const banner = document.getElementById('install-banner');
+            banner.classList.add('opacity-0', 'translate-y-10');
+            setTimeout(() => banner.classList.add('hidden'), 500);
+            localStorage.setItem('install_prompt_closed', 'true');
+        });
+
+        // Compartir / QR
+        const shareBtn = document.getElementById('share-btn');
+        const sharePopup = 'share-popup';
+        const qrcodeContainer = document.getElementById('qrcode-container');
+        const shareUrlInput = document.getElementById('share-url');
+        
+        shareBtn.addEventListener('click', () => {
+            const url = 'https://github.com/ConectaBP/emillatto-mundoqhea.git'; 
+            shareUrlInput.value = url;
+            
+            shareUrlInput.onclick = () => {
+                shareUrlInput.select();
+                navigator.clipboard?.writeText(url).then(() => {
+                    const originalValue = shareUrlInput.value;
+                    shareUrlInput.value = "¡Enlace copiado!";
+                    setTimeout(() => shareUrlInput.value = originalValue, 2000);
+                }).catch(() => document.execCommand('copy'));
+            };
+
+            qrcodeContainer.innerHTML = '';
+            new QRCode(qrcodeContainer, {
+                text: url, width: 150, height: 150,
+                colorDark : "#f43f5e", colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+            openPopup(sharePopup);
+        });
+        document.getElementById('close-share-popup-btn').addEventListener('click', () => closePopup(sharePopup));
+        
+        // Popups Categorías
+        ['helados', 'gomitas'].forEach(cat => {
+            document.getElementById(`${cat}-btn`)?.addEventListener('click', () => openPopup(`${cat}-popup`));
+            document.getElementById(`close-${cat}-popup-btn`)?.addEventListener('click', () => closePopup(`${cat}-popup`));
+        });
+
+        // Carrito Popup Logic
+        document.getElementById('open-cart-btn')?.addEventListener('click', () => {
+            openPopup('cart-popup');
+            updateCartUI();
+        });
+        document.getElementById('close-cart-popup-btn')?.addEventListener('click', () => closePopup('cart-popup'));
+
+        // Cerrar al clickear fuera
+        ['share-popup', 'helados-popup', 'gomitas-popup', 'install-popup', 'cart-popup'].forEach(id => {
+            document.getElementById(id)?.addEventListener('click', (e) => {
+                if (e.target.id === id) closePopup(id);
+            });
+        });
+
+        // Lógica del Carrito de Compras
+        let cart = [];
+
+        window.addToCart = function(name, price, image) {
+            const existing = cart.find(item => item.name === name);
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({ name, price, image, qty: 1 });
+            }
+            updateCartUI();
+            
+            // Animación visual al agregar
+            const cartBadge = document.getElementById('cart-badge');
+            cartBadge.classList.add('scale-150');
+            setTimeout(() => cartBadge.classList.remove('scale-150'), 200);
+        }
+
+        window.updateCartUI = function() {
+            const badge = document.getElementById('cart-badge');
+            const count = cart.reduce((acc, item) => acc + item.qty, 0);
+            
+            if (count > 0) {
+                badge.innerText = count;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+
+            const itemsContainer = document.getElementById('cart-items');
+            const totalContainer = document.getElementById('cart-total');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            
+            if (cart.length === 0) {
+                if (itemsContainer) itemsContainer.innerHTML = '<p class="text-center text-slate-400 text-sm py-8 font-medium"><i class="fas fa-box-open block text-3xl mb-3 text-slate-300"></i> Tu carrito está vacío 🍬</p>';
+                if (totalContainer) totalContainer.innerText = '$ 0';
+                if (checkoutBtn) checkoutBtn.classList.add('opacity-50', 'pointer-events-none');
+                return;
+            }
+
+            if (checkoutBtn) checkoutBtn.classList.remove('opacity-50', 'pointer-events-none');
+            
+            let html = '';
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.price * item.qty;
+                html += `
+                <div class="flex items-center justify-between bg-white/80 p-2.5 rounded-xl border border-white shadow-sm mb-2">
+                    <div class="flex items-center gap-3">
+                        <img src="${item.image}" class="w-12 h-12 rounded-lg object-cover shadow-sm">
+                        <div>
+                            <h5 class="text-xs font-bold text-slate-700 leading-tight">${item.name}</h5>
+                            <p class="text-[11px] text-pink-500 font-bold mt-0.5">$ ${new Intl.NumberFormat('es-CO').format(item.price)}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 bg-pink-50 rounded-lg px-1.5 py-0.5 shadow-inner border border-pink-100">
+                        <button onclick="updateQty(${index}, -1)" class="w-6 h-6 text-pink-400 hover:text-pink-600 flex items-center justify-center font-bold text-lg leading-none">-</button>
+                        <span class="text-xs font-bold w-4 text-center text-slate-600">${item.qty}</span>
+                        <button onclick="updateQty(${index}, 1)" class="w-6 h-6 text-pink-400 hover:text-pink-600 flex items-center justify-center font-bold text-lg leading-none">+</button>
+                    </div>
+                </div>`;
+            });
+            
+            if (itemsContainer) itemsContainer.innerHTML = html;
+            if (totalContainer) totalContainer.innerText = '$ ' + new Intl.NumberFormat('es-CO').format(total);
+        }
+
+        window.updateQty = function(index, delta) {
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        document.getElementById('checkout-btn')?.addEventListener('click', () => {
+            if (cart.length === 0) return;
+            let text = '¡Hola! Quisiera hacer el siguiente pedido de gomitas:%0A%0A';
+            let total = 0;
+            cart.forEach(item => {
+                text += `🍬 ${item.qty}x ${item.name} ($${new Intl.NumberFormat('es-CO').format(item.price * item.qty)})%0A`;
+                total += item.price * item.qty;
+            });
+            text += `%0A*Total: $${new Intl.NumberFormat('es-CO').format(total)}*`;
+            window.open(`https://wa.me/573117223559?text=${text}`, '_blank');
+        });
+
+        // Guardar Contacto (vCard)
+        const saveContactBtn = document.getElementById('save-contact-btn');
+        const vCardData = `BEGIN:VCARD\nVERSION:3.0\nFN:Que hable el azúcar\nORG:Que hable el azúcar\nTEL;TYPE=WORK,VOICE:+573117223559\nTEL;TYPE=CELL,VOICE:+573117223559\nURL:${window.location.href}\nEND:VCARD`;
+        saveContactBtn.href = `data:text/vcard;charset=utf-8,${encodeURIComponent(vCardData)}`;
+
+        // Instalación PWA
+        const installBtn = document.getElementById('install-btn');
+        if (installBtn) installBtn.addEventListener('click', (e) => { e.preventDefault(); openPopup('install-popup'); });
+        document.getElementById('close-install-popup-btn')?.addEventListener('click', () => closePopup('install-popup'));
+
+        // ==========================================
+        // CONFIGURACIÓN PWA (App Nativa)
+        // ==========================================
+        (function setupPWA() {
+            // Service Worker con fetch (Requerido por Android para ser instalable)
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    const swCode = `
+                        self.addEventListener('install', (e) => { self.skipWaiting(); }); 
+                        self.addEventListener('activate', (e) => { e.waitUntil(clients.claim()); }); 
+                        self.addEventListener('fetch', (e) => { 
+                            e.respondWith(fetch(e.request).catch(() => new Response('Offline'))); 
+                        });
+                    `;
+                    const swBlob = new Blob([swCode], { type: 'application/javascript' });
+                    navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(err => console.log(err));
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
