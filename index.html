@@ -1,36 +1,26 @@
 <!DOCTYPE html>
-<html lang="es" prefix="og: https://ogp.me/ns#">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Meta etiquetas Open Graph y Twitter Card al inicio para vista previa en WhatsApp -->
-    <title>Tarjeta Digital - Que hable el azúcar</title>
-    <meta name="description" content="Dulces historias viajeras. Descubre nuestro delicioso menú de helados Emilatto y gomitas Mundo Qhea.">
+    <!-- Meta etiquetas para vista previa al compartir (WhatsApp, Facebook, etc.) -->
     <meta property="og:site_name" content="Que hable el azúcar">
     <meta property="og:title" content="Que hable el azúcar - Emilatto & Mundo Qhea">
     <meta property="og:description" content="Dulces historias viajeras. Descubre nuestro delicioso menú de helados Emilatto y gomitas Mundo Qhea.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://soyconectaplus.com/emilatto-mundoqhea/">
-    <meta property="og:image" content="https://i.postimg.cc/mrDzpszg/Logos-Emilatto-y-Mundo-QHFA.png">
-    <meta property="og:image:secure_url" content="https://i.postimg.cc/mrDzpszg/Logos-Emilatto-y-Mundo-QHFA.png">
+    <meta property="og:image" content="https://i.postimg.cc/prFbsHt8/logo-preview.png">
+    <meta property="og:image:secure_url" content="https://i.postimg.cc/prFbsHt8/logo-preview.png">
     <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Logo Que hable el azúcar - Emilatto y Mundo Qhea">
+    <meta property="og:url" content="https://soyconectaplus.com/emilatto-mundoqhea/">
+    <meta property="og:type" content="website">
+
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Que hable el azúcar - Emilatto & Mundo Qhea">
-    <meta name="twitter:description" content="Dulces historias viajeras. Descubre nuestro delicioso menú de helados Emilatto y gomitas Mundo Qhea.">
-    <meta name="twitter:image" content="https://i.postimg.cc/mrDzpszg/Logos-Emilatto-y-Mundo-QHFA.png">
+    <meta name="twitter:description" content="Dulces historias viajeras. Descubre nuestro menú de helados y gomitas.">
+    <meta name="twitter:image" content="https://i.postimg.cc/prFbsHt8/logo-preview.png">
 
-    <!-- Etiquetas PWA para hacer instalable la web -->
-    <meta name="theme-color" content="#fdfbf7">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Que hable el azúcar">
-    <link rel="apple-touch-icon" href="https://i.postimg.cc/mrDzpszg/Logos-Emilatto-y-Mundo-QHFA.png">
-
-    <!-- Protección de interfaz y disuasión sin bloquear botones ni campos de texto -->
+    <!-- Protección de interfaz y disuasión -->
     <script>
         (function() {
             const isEditable = (el) => {
@@ -58,6 +48,15 @@
             });
         })();
     </script>
+    
+    <!-- Etiquetas PWA para hacer instalable la web -->
+    <meta name="theme-color" content="#fdfbf7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Que hable el azúcar">
+    
+    <!-- Ícono para iOS y Android -->
+    <link rel="apple-touch-icon" href="https://i.postimg.cc/prFbsHt8/logo-preview.png">
 
     <!-- Configuración PWA Nativa -->
     <link rel="manifest" id="manifest-link">
@@ -70,7 +69,7 @@
             "background_color": "#fdfbf7",
             "theme_color": "#fdfbf7",
             "icons": [{
-                "src": "https://i.postimg.cc/mrDzpszg/Logos-Emilatto-y-Mundo-QHFA.png",
+                "src": "https://i.postimg.cc/prFbsHt8/logo-preview.png",
                 "sizes": "192x192 512x512",
                 "type": "image/png",
                 "purpose": "any maskable"
@@ -79,13 +78,15 @@
         document.getElementById('manifest-link').setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(manifest)));
     </script>
     
+    <title>Tarjeta Digital - Que hable el azúcar</title>
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Font Awesome para los íconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- Google Fonts: 'Pacifico' y 'Quicksand' -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -110,7 +111,6 @@
             -webkit-user-drag: none;
         }
 
-        /* Formas de fondo para dar textura (Blobs) */
         .bg-blobs {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -158,7 +158,7 @@
         .menu-scrollbar::-webkit-scrollbar-thumb { background-color: #fbcfe8; border-radius: 10px; }
 
         .glass-panel {
-            background: rgba(255, 255, 255, 0.68);
+            background: rgba(255, 255, 255, 0.65);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.85);
@@ -167,36 +167,26 @@
 </head>
 <body class="md:flex md:items-center md:justify-center min-h-screen text-slate-700">
 
-    <!-- Fondo dinámico -->
     <div class="bg-blobs">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
         <div class="blob blob-3"></div>
     </div>
 
-    <!-- Contenedor Principal (Tarjeta Glass) -->
-    <div class="w-full md:max-w-sm glass-panel md:shadow-[0_8px_32px_rgba(251,207,232,0.45)] text-center md:rounded-[2rem] min-h-screen md:min-h-0 relative z-10 overflow-hidden flex flex-col">
+    <!-- Contenedor Principal -->
+    <div class="w-full md:max-w-sm glass-panel md:shadow-[0_8px_32px_rgba(251,207,232,0.4)] text-center md:rounded-[2rem] min-h-screen md:min-h-0 relative z-10 overflow-hidden flex flex-col">
         
-        <!-- Portada (Proporción 16:9 Horizontal) -->
+        <!-- Portada -->
         <div class="relative w-full aspect-video bg-white/40 flex items-center justify-center">
-            <img src="https://i.postimg.cc/mrDzpszg/Logos-Emilatto-y-Mundo-QHFA.png" alt="Portada Que Hable El Azúcar" class="w-full h-full object-contain p-2">
+            <img src="https://i.postimg.cc/prFbsHt8/logo-preview.png" alt="Portada Que Hable El Azúcar" class="w-full h-full object-contain p-2">
         </div>
 
         <div class="px-6 pb-8 pt-4 flex-grow flex flex-col">
             <h1 class="font-logo text-3xl text-rose-500 tracking-wide drop-shadow-sm leading-tight">Que hable el azúcar</h1>
             <p class="font-bold text-slate-500 mt-1 tracking-widest uppercase text-[10px]">Dulces historias viajeras</p>
-
-            <!-- Botón Principal: Mi Pedido (Carrito) -->
-            <div class="mt-4 flex justify-center">
-                <button type="button" id="main-order-btn" class="bg-gradient-to-r from-rose-400 via-pink-500 to-rose-500 text-white font-bold py-3 px-7 rounded-full text-sm transition-all duration-300 hover:brightness-105 hover:scale-105 transform shadow-md w-full max-w-[340px] flex items-center justify-center gap-2 cursor-pointer">
-                    <i class="fas fa-shopping-bag text-base"></i>
-                    <span>Mi Pedido</span>
-                    <span class="cart-badge-inline bg-white text-rose-500 text-xs font-extrabold px-2 py-0.5 rounded-full hidden">0</span>
-                </button>
-            </div>
             
             <!-- Tarjetas de Marcas -->
-            <div class="flex flex-col gap-5 mt-5 mb-6 w-full max-w-[340px] mx-auto">
+            <div class="flex flex-col gap-5 mt-6 mb-6 w-full max-w-[340px] mx-auto">
                 
                 <!-- Tarjeta Emilatto (Helados) -->
                 <div class="bg-gradient-to-br from-green-50 to-[#e2f7eb] rounded-3xl p-4 border border-green-100 shadow-sm relative overflow-hidden group">
@@ -210,10 +200,10 @@
                                 <p class="text-[10px] text-green-600 font-bold uppercase tracking-wide">Menú de Helados</p>
                             </div>
                         </div>
-                        <button type="button" onclick="openPopup('helados-popup')" class="bg-white text-green-500 w-8 h-8 rounded-full flex items-center justify-center shadow-sm hover:bg-green-50 transition-colors cursor-pointer" aria-label="Abrir Menú Emilatto"><i class="fas fa-chevron-right text-xs"></i></button>
+                        <button type="button" onclick="openPopup('helados-popup')" class="bg-white text-green-500 w-8 h-8 rounded-full flex items-center justify-center shadow-sm hover:bg-green-50 transition-colors cursor-pointer"><i class="fas fa-chevron-right text-xs"></i></button>
                     </div>
                     
-                    <a href="https://wa.me/573104362211?text=%C2%A1Hola!%20Quisiera%20hacer%20un%20pedido%20de%20helados." target="_blank" rel="noopener noreferrer" class="w-full bg-[#9CE4BE] text-slate-800 font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 mb-3 shadow-sm hover:scale-[1.02] transition-all border border-[#85d3aa]">
+                    <a href="https://wa.me/573104362211?text=¡Hola!%20Quisiera%20hacer%20un%20pedido%20de%20helados." target="_blank" rel="noopener noreferrer" class="w-full bg-[#9CE4BE] text-slate-800 font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 mb-3 shadow-sm hover:scale-[1.02] transition-all border border-[#85d3aa]">
                         <i class="fab fa-whatsapp text-green-700 text-xl"></i>
                         <div class="flex flex-col text-left leading-tight">
                             <span class="text-[11px] font-semibold text-slate-600">Pedir helados al</span>
@@ -239,10 +229,10 @@
                                 <p class="text-[10px] text-pink-500 font-bold uppercase tracking-wide">Menú de Gomitas</p>
                             </div>
                         </div>
-                        <button type="button" onclick="openPopup('gomitas-popup')" class="bg-white text-pink-500 w-8 h-8 rounded-full flex items-center justify-center shadow-sm hover:bg-pink-50 transition-colors cursor-pointer" aria-label="Abrir Menú Mundo Qhea"><i class="fas fa-chevron-right text-xs"></i></button>
+                        <button type="button" onclick="openPopup('gomitas-popup')" class="bg-white text-pink-500 w-8 h-8 rounded-full flex items-center justify-center shadow-sm hover:bg-pink-50 transition-colors cursor-pointer"><i class="fas fa-chevron-right text-xs"></i></button>
                     </div>
                     
-                    <a href="https://wa.me/573117223559?text=%C2%A1Hola!%20Quisiera%20hacer%20un%20pedido%20de%20gomitas." target="_blank" rel="noopener noreferrer" class="w-full bg-[#FC99DB] text-slate-800 font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 mb-3 shadow-md hover:scale-[1.02] transition-all border border-pink-300">
+                    <a href="https://wa.me/573117223559?text=¡Hola!%20Quisiera%20hacer%20un%20pedido%20de%20gomitas." target="_blank" rel="noopener noreferrer" class="w-full bg-[#FC99DB] text-slate-800 font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 mb-3 shadow-md hover:scale-[1.02] transition-all border border-pink-300">
                         <i class="fab fa-whatsapp text-pink-700 text-xl"></i>
                         <div class="flex flex-col text-left leading-tight">
                             <span class="text-[11px] font-semibold text-slate-700">Pedir gomitas al</span>
@@ -273,10 +263,10 @@
                     <p class="text-[10px] mt-1.5 text-slate-600 font-bold">Guardar</p>
                 </div>
                 <div class="text-center w-14 group">
-                    <button type="button" id="share-btn" class="bg-rose-50 text-rose-500 w-12 h-12 rounded-full flex items-center justify-center text-xl transition-all duration-300 group-hover:scale-110 shadow-sm mx-auto border border-rose-100 hover:bg-rose-100 cursor-pointer" aria-label="Compartir QR">
+                    <button type="button" id="share-btn" class="bg-rose-50 text-rose-500 w-12 h-12 rounded-full flex items-center justify-center text-xl transition-all duration-300 group-hover:scale-110 shadow-sm mx-auto border border-rose-100 hover:bg-rose-100 cursor-pointer" aria-label="QR">
                         <i class="fas fa-share-nodes"></i>
                     </button>
-                    <p class="text-[10px] mt-1.5 text-slate-600 font-bold">Compartir</p>
+                    <p class="text-[10px] mt-1.5 text-slate-600 font-bold">QR</p>
                 </div>
             </div>
 
@@ -287,211 +277,146 @@
                 </button>
                 <div class="pt-3 border-t border-rose-100 flex flex-col items-center">
                     <p class="text-[10px] text-slate-500 mb-2">Creado por <span class="text-slate-800 font-bold">Conecta+</span></p>
-                    <a href="https://wa.me/573125749480?text=%C2%A1Hola!%20Me%20encant%C3%B3%20la%20tarjeta%20digital%20de%20Que%20hable%20el%20az%C3%BAcar%20y%20quiero%20crear%20una%20para%20mi%20negocio." target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center glass-panel text-slate-800 text-[10px] font-bold py-1.5 px-3.5 rounded-full hover:bg-white transition-all shadow-sm mb-3">
-                        <i class="fab fa-whatsapp text-green-500 mr-1.5 text-sm"></i> ¡Quiero el mío!
+                    <a href="https://wa.me/573125749480?text=¡Hola!%20Me%20encantó%20la%20tarjeta%20digital%20y%20quiero%20crear%20una%20para%20mi%20negocio." target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center glass-panel text-slate-800 text-[10px] font-bold py-1 px-3 rounded-full hover:bg-white transition-all shadow-sm mb-3">
+                        <i class="fab fa-whatsapp text-green-500 mr-1 text-sm"></i> ¡Quiero el mío!
                     </a>
                     
-                    <!-- Contador de visitas con nuevo dominio -->
                     <div class="flex flex-col items-center justify-center mt-1 mb-1">
                         <img src="https://hits.sh/soyconectaplus.com/emilatto-mundoqhea.svg?style=flat-square&label=VISITAS&color=fc99db&labelColor=ffffff" alt="Contador de visitas" class="h-5 shadow-sm rounded">
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Botón Flotante Carrito -->
-        <button type="button" id="floating-cart-btn" class="fixed md:absolute bottom-5 right-5 bg-gradient-to-tr from-rose-500 to-pink-400 text-white w-14 h-14 rounded-full shadow-[0_8px_25px_rgba(244,63,94,0.45)] flex items-center justify-center text-2xl z-40 hover:scale-110 transition-transform border-2 border-white cursor-pointer" aria-label="Ver Carrito">
-            <i class="fas fa-shopping-bag"></i>
-            <span class="cart-badge absolute -top-1 -right-1 bg-slate-800 text-white text-[11px] font-extrabold w-6 h-6 rounded-full flex items-center justify-center border-2 border-white hidden">0</span>
-        </button>
-
-        <!-- Notificación (Toast) -->
-        <div id="toast" class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-slate-800 text-white px-5 py-2.5 rounded-full shadow-xl z-[70] text-xs font-bold transition-all duration-300 opacity-0 pointer-events-none translate-y-[-20px] flex items-center gap-2 border border-pink-300">
-            <i class="fas fa-check-circle text-pink-400 text-base"></i> <span id="toast-msg">Agregado al pedido</span>
-        </div>
     </div>
 
-    <!-- ================= MODALES / POPUPS ================= -->
-    
     <!-- Popup: Compartir -->
-    <div id="share-popup" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md flex items-center justify-center z-50 hidden p-4 transition-opacity">
-        <div class="bg-white/95 rounded-3xl shadow-2xl p-7 max-w-xs w-full text-center relative text-slate-700 border border-rose-100">
+    <div id="share-popup" class="fixed inset-0 bg-white/40 backdrop-blur-md flex items-center justify-center z-50 hidden p-4 transition-opacity">
+        <div class="glass-panel rounded-3xl shadow-xl p-8 max-w-xs w-full text-center relative text-slate-700">
             <button type="button" id="close-share-popup-btn" class="absolute top-3 right-4 text-2xl text-slate-400 hover:text-rose-400 transition-colors cursor-pointer">&times;</button>
             <h3 class="text-2xl font-bold mb-1 font-logo text-rose-500">Comparte dulzura</h3>
-            <p class="text-xs text-slate-500 mb-5">Escanea el código o copia el enlace</p>
+            <p class="text-xs text-slate-500 mb-5">Escanea el código para compartirnos</p>
             
-            <div id="qrcode-container" class="flex justify-center mb-5 bg-white p-3 rounded-2xl mx-auto w-max shadow-sm border border-rose-100"></div>
+            <div id="qrcode-container" class="flex justify-center mb-5 bg-white p-3 rounded-xl mx-auto w-max shadow-sm border border-rose-50"></div>
             
-            <input type="text" id="share-url" class="w-full bg-rose-50/70 text-slate-700 text-center rounded-xl p-2.5 text-xs font-semibold border border-rose-200 focus:outline-none cursor-pointer" readonly>
-            <p class="text-[10px] text-slate-400 mt-2">Toca el enlace para copiarlo</p>
+            <input type="text" id="share-url" class="w-full glass-panel text-slate-600 text-center rounded-xl p-2.5 text-xs focus:outline-none focus:ring-1 focus:ring-rose-300 transition-all cursor-pointer" readonly>
+            <p class="text-[9px] text-slate-400 mt-2">Toca el enlace para copiar</p>
         </div>
     </div>
 
-    <!-- Popup: Helados (EMILATTO COMPLETO CON CARRITO) -->
-    <div id="helados-popup" class="fixed inset-0 bg-white/75 backdrop-blur-xl z-50 hidden p-4 text-slate-700">
-        <div class="w-full h-full max-w-md mx-auto relative flex flex-col glass-panel rounded-[2rem] overflow-hidden shadow-2xl border border-green-200">
-            <div class="flex justify-between items-center py-4 px-5 border-b border-green-100 shrink-0 bg-green-50/70">
+    <!-- Popup: Helados (Emilatto) -->
+    <div id="helados-popup" class="fixed inset-0 bg-white/70 backdrop-blur-xl z-50 hidden p-4 text-slate-700">
+        <div class="w-full h-full max-w-md mx-auto relative flex flex-col glass-panel rounded-[2rem] overflow-hidden shadow-2xl">
+            <div class="flex justify-between items-center py-4 px-5 border-b border-white/50 shrink-0 bg-white/30">
                 <div class="flex items-center gap-3">
-                    <i class="fas fa-ice-cream text-green-600 text-2xl"></i>
-                    <h2 class="font-logo text-3xl text-green-700 tracking-wide mt-1">Menú Emilatto</h2>
+                    <i class="fas fa-ice-cream text-rose-400 text-2xl"></i>
+                    <h2 class="font-logo text-3xl text-rose-500 tracking-wide mt-1">Menú Emilatto</h2>
                 </div>
                 <div class="flex items-center gap-2 z-10">
-                    <button type="button" onclick="openCartModal()" class="relative text-green-700 w-9 h-9 flex items-center justify-center rounded-full bg-white hover:bg-green-100 transition-colors shadow-sm cursor-pointer" title="Ver Carrito">
-                        <i class="fas fa-shopping-bag"></i>
-                        <span class="cart-badge-mini absolute -top-1 -right-1 bg-rose-500 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+                    <button type="button" onclick="openPopup('cart-popup'); updateCartUI();" class="relative text-green-600 w-9 h-9 flex items-center justify-center rounded-full bg-white/80 hover:bg-green-50 transition-colors shadow-sm cursor-pointer" title="Ver Carrito">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-badge-count absolute -top-1 -right-1 bg-rose-500 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
                     </button>
-                    <button type="button" id="close-helados-popup-btn" class="text-2xl text-slate-400 hover:text-green-600 transition-colors w-9 h-9 flex items-center justify-center rounded-full bg-white/80 cursor-pointer">&times;</button>
+                    <button type="button" id="close-helados-popup-btn" class="text-2xl text-slate-400 hover:text-rose-500 transition-colors w-9 h-9 flex items-center justify-center rounded-full bg-white/50 cursor-pointer">&times;</button>
                 </div>
             </div>
             
-            <div class="overflow-y-auto menu-scrollbar flex-grow py-4 px-4">
-                <p class="text-xs text-slate-500 mb-4 font-semibold">Toca <strong class="text-green-600">+</strong> para sumar helados a tu carrito o pídelos al instante.</p>
-                <div id="emilatto-menu-container"></div>
-
-                <div class="mt-6 mb-4">
-                    <button type="button" onclick="closePopup('helados-popup'); openCartModal();" class="w-full bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold py-3.5 px-5 rounded-2xl text-sm shadow-md hover:brightness-105 transition-all flex items-center justify-center gap-2 cursor-pointer">
-                        <i class="fas fa-shopping-bag"></i> Ver mi Pedido
-                    </button>
-                </div>
-            </div>
+            <div id="helados-menu-container" class="overflow-y-auto menu-scrollbar flex-grow py-4 px-4 space-y-6"></div>
         </div>
     </div>
 
-    <!-- Popup: Gomitas (MUNDO QHEA COMPLETO CON CARRITO) -->
-    <div id="gomitas-popup" class="fixed inset-0 bg-white/75 backdrop-blur-xl z-50 hidden p-4 text-slate-700">
-        <div class="w-full h-full max-w-md mx-auto relative flex flex-col glass-panel rounded-[2rem] overflow-hidden shadow-2xl border border-pink-200">
-            <div class="flex justify-between items-center py-4 px-5 border-b border-pink-100 shrink-0 bg-pink-50/70">
+    <!-- Popup: Gomitas (Mundo Qhea) -->
+    <div id="gomitas-popup" class="fixed inset-0 bg-white/70 backdrop-blur-xl z-50 hidden p-4 text-slate-700">
+        <div class="w-full h-full max-w-md mx-auto relative flex flex-col glass-panel rounded-[2rem] overflow-hidden shadow-2xl">
+            <div class="flex justify-between items-center py-4 px-5 border-b border-white/50 shrink-0 bg-white/30">
                 <div class="flex items-center gap-3">
-                    <i class="fas fa-candy-cane text-pink-500 text-2xl"></i>
-                    <h2 class="font-logo text-3xl text-pink-500 tracking-wide mt-1">Mundo Qhea</h2>
+                    <i class="fas fa-candy-cane text-pink-400 text-2xl"></i>
+                    <h2 class="font-logo text-3xl text-pink-500 tracking-wide mt-1">Gomitas</h2>
                 </div>
                 <div class="flex items-center gap-2 z-10">
-                    <button type="button" onclick="openCartModal()" class="relative text-pink-500 w-9 h-9 flex items-center justify-center rounded-full bg-white hover:bg-pink-100 transition-colors shadow-sm cursor-pointer" title="Ver Carrito">
-                        <i class="fas fa-shopping-bag"></i>
-                        <span class="cart-badge-mini absolute -top-1 -right-1 bg-rose-500 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+                    <button type="button" id="open-cart-btn" class="relative text-pink-500 w-9 h-9 flex items-center justify-center rounded-full bg-white/70 hover:bg-pink-100 transition-colors shadow-sm cursor-pointer" title="Ver Carrito">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span id="cart-badge" class="cart-badge-count absolute -top-1 -right-1 bg-red-500 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden transition-transform duration-200">0</span>
                     </button>
-                    <button type="button" id="close-gomitas-popup-btn" class="text-2xl text-slate-400 hover:text-pink-500 transition-colors w-9 h-9 flex items-center justify-center rounded-full bg-white/80 cursor-pointer">&times;</button>
+                    <button type="button" id="close-gomitas-popup-btn" class="text-2xl text-slate-400 hover:text-pink-500 transition-colors w-9 h-9 flex items-center justify-center rounded-full bg-white/50 cursor-pointer">&times;</button>
                 </div>
             </div>
             
-            <div class="overflow-y-auto menu-scrollbar flex-grow py-4 px-4">
-                <p class="text-xs text-slate-500 mb-4 font-semibold">El toque dulce que alegra tu día. Toca <strong class="text-pink-500">+</strong> para agregar a tu pedido.</p>
-                <div id="qhea-menu-container" class="space-y-3"></div>
-
-                <div class="mt-6 mb-4">
-                    <button type="button" onclick="closePopup('gomitas-popup'); openCartModal();" class="w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold py-3.5 px-5 rounded-2xl text-sm shadow-md hover:brightness-105 transition-all flex items-center justify-center gap-2 cursor-pointer">
-                        <i class="fas fa-shopping-bag"></i> Ver mi Pedido
-                    </button>
-                </div>
+            <div class="overflow-y-auto menu-scrollbar flex-grow py-6 px-4">
+                <p class="text-sm text-slate-500 mb-6 font-medium">El toque dulce que alegra tu día con nuestras delicias en gomitas.</p>
+                
+                <div id="gomitas-menu-container" class="space-y-4"></div>
             </div>
         </div>
     </div>
 
-    <!-- Popup: Carrito Unificado (Emilatto & Mundo Qhea) -->
-    <div id="cart-popup" class="fixed inset-0 bg-slate-900/50 backdrop-blur-md z-[60] hidden p-4 text-slate-700 flex items-center justify-center">
-        <div class="w-full max-w-sm bg-white/95 rounded-[2rem] overflow-hidden shadow-2xl border-2 border-pink-200 flex flex-col max-h-[92vh]">
-            <div class="flex justify-between items-center py-4 px-5 border-b border-rose-100 shrink-0 bg-rose-50/60">
-                <div class="flex items-center gap-2.5">
-                    <i class="fas fa-shopping-bag text-rose-500 text-xl"></i>
-                    <h2 class="font-logo text-2xl text-rose-500 tracking-wide mt-0.5">Tu Pedido</h2>
+    <!-- Popup: Carrito Unificado (Emilatto + Mundo Qhea) -->
+    <div id="cart-popup" class="fixed inset-0 bg-white/75 backdrop-blur-xl z-50 hidden p-4 text-slate-700">
+        <div class="w-full h-full max-w-md mx-auto relative flex flex-col glass-panel rounded-[2rem] overflow-hidden shadow-2xl border-2 border-pink-200/60">
+            <div class="flex justify-between items-center py-4 px-5 border-b border-white/50 shrink-0 bg-white/30">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-shopping-basket text-pink-500 text-2xl"></i>
+                    <h2 class="font-logo text-2xl text-pink-500 tracking-wide mt-1">Tu Pedido</h2>
                 </div>
-                <button type="button" id="close-cart-popup-btn" class="text-2xl text-slate-400 hover:text-rose-500 transition-colors w-8 h-8 flex items-center justify-center rounded-full bg-white shadow-sm cursor-pointer">&times;</button>
+                <button type="button" id="close-cart-popup-btn" class="text-2xl text-slate-400 hover:text-pink-500 transition-colors z-10 w-8 h-8 flex items-center justify-center rounded-full bg-white/50 shadow-sm cursor-pointer">&times;</button>
             </div>
             
-            <div class="overflow-y-auto menu-scrollbar flex-grow py-4 px-4 space-y-4">
-                <div id="cart-items" class="space-y-2.5"></div>
+            <div class="overflow-y-auto menu-scrollbar flex-grow py-4 px-4 bg-white/10 space-y-4">
+                <div id="cart-items"></div>
 
-                <!-- Formulario de Entrega y Pago -->
-                <div id="delivery-form" class="bg-rose-50/70 rounded-2xl p-3.5 border border-rose-100 space-y-3 text-left hidden">
-                    <p class="text-[11px] font-bold uppercase tracking-wider text-rose-500 flex items-center gap-1.5">
-                        <i class="fas fa-clipboard-list"></i> Datos de Entrega
-                    </p>
-
+                <div id="cart-delivery-details" class="bg-white/75 rounded-2xl p-3.5 border border-white space-y-2.5 text-left hidden">
+                    <p class="text-[11px] font-bold uppercase tracking-wider text-rose-500">Datos de entrega</p>
                     <div>
-                        <label for="customer-name" class="text-[10px] font-bold text-slate-600 block mb-1">Tu Nombre</label>
-                        <input type="text" id="customer-name" oninput="renderCheckoutActions()" placeholder="Ej: Laura Gómez" class="w-full bg-white text-slate-700 text-xs rounded-xl px-3 py-2 border border-rose-200 focus:outline-none focus:border-rose-400">
+                        <label for="sweet-address" class="text-[10px] text-slate-600 font-semibold block mb-1">Dirección / Barrio (opcional)</label>
+                        <input type="text" id="sweet-address" oninput="updateCartButtons()" placeholder="Ej: Calle 12 # 8-30" class="w-full bg-white text-slate-700 text-xs rounded-xl px-3 py-2 border border-rose-100 focus:outline-none focus:border-rose-300">
                     </div>
-
                     <div>
-                        <label class="text-[10px] font-bold text-slate-600 block mb-1">Modalidad</label>
-                        <div class="grid grid-cols-2 gap-2">
-                            <button type="button" id="btn-mode-domicilio" onclick="setDeliveryMode('Domicilio')" class="py-2 px-2 rounded-xl text-xs font-bold border border-rose-400 bg-rose-500 text-white flex items-center justify-center gap-1.5 transition-all cursor-pointer">
-                                <i class="fas fa-motorcycle"></i> Domicilio
-                            </button>
-                            <button type="button" id="btn-mode-recoger" onclick="setDeliveryMode('Recoger en Punto')" class="py-2 px-2 rounded-xl text-xs font-bold border border-rose-200 bg-white text-slate-600 flex items-center justify-center gap-1.5 transition-all cursor-pointer">
-                                <i class="fas fa-store"></i> Recoger
-                            </button>
-                        </div>
-                    </div>
-
-                    <div id="address-field-container">
-                        <label for="order-address" class="text-[10px] font-bold text-slate-600 block mb-1">Dirección / Barrio</label>
-                        <input type="text" id="order-address" oninput="renderCheckoutActions()" placeholder="Ej: Calle 10 # 12-30, Barrio Centro" class="w-full bg-white text-slate-700 text-xs rounded-xl px-3 py-2 border border-rose-200 focus:outline-none focus:border-rose-400">
-                    </div>
-
-                    <div>
-                        <label for="order-payment" class="text-[10px] font-bold text-slate-600 block mb-1">Método de Pago</label>
-                        <select id="order-payment" onchange="renderCheckoutActions()" class="w-full bg-white text-slate-700 text-xs rounded-xl px-3 py-2 border border-rose-200 focus:outline-none focus:border-rose-400">
-                            <option value="Efectivo">💵 Efectivo</option>
-                            <option value="Nequi">📱 Nequi</option>
-                            <option value="Bancolombia">🏦 Transferencia Bancolombia</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label for="order-notes" class="text-[10px] font-bold text-slate-600 block mb-1">Notas o sabores (opcional)</label>
-                        <input type="text" id="order-notes" oninput="renderCheckoutActions()" placeholder="Ej: Helado de vainilla y fresa, tarjeta con mensaje..." class="w-full bg-white text-slate-700 text-xs rounded-xl px-3 py-2 border border-rose-200 focus:outline-none focus:border-rose-400">
+                        <label for="sweet-notes" class="text-[10px] text-slate-600 font-semibold block mb-1">Notas / Dedicatoria (opcional)</label>
+                        <input type="text" id="sweet-notes" oninput="updateCartButtons()" placeholder="Ej: Mensaje para tarjeta, sabores..." class="w-full bg-white text-slate-700 text-xs rounded-xl px-3 py-2 border border-rose-100 focus:outline-none focus:border-rose-300">
                     </div>
                 </div>
             </div>
             
-            <div class="p-4 bg-white border-t border-rose-100 shrink-0">
-                <div id="cart-total-box" class="flex justify-between items-center mb-3 px-1 hidden">
-                    <span class="font-bold text-xs uppercase tracking-wider text-slate-500">Total Estimado:</span>
-                    <span id="cart-total" class="font-extrabold text-lg text-rose-500">$ 0</span>
+            <div class="p-5 bg-white/85 border-t border-white/50 shrink-0 backdrop-blur-md rounded-b-[2rem] space-y-2.5">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="font-bold text-slate-500">Total a pagar:</span>
+                    <span id="cart-total" class="font-bold text-xl text-pink-500">$ 0</span>
                 </div>
-
-                <!-- Botones dinámicos de envío por WhatsApp según las marcas en el carrito -->
-                <div id="checkout-buttons-container" class="space-y-2"></div>
-
-                <div class="flex justify-between items-center mt-3 px-1">
-                    <button type="button" onclick="clearCart()" id="clear-cart-btn" class="text-rose-500 text-[11px] font-bold hover:underline hidden cursor-pointer">
-                        <i class="fas fa-trash-can mr-1"></i> Vaciar carrito
-                    </button>
-                    <button type="button" onclick="closePopup('cart-popup')" class="text-slate-500 text-xs font-semibold hover:text-slate-800 underline ml-auto cursor-pointer">
-                        Seguir eligiendo
-                    </button>
-                </div>
+                <button type="button" id="checkout-qhea-btn" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-4 rounded-xl text-xs transition-all duration-300 shadow-md flex items-center justify-center gap-2 opacity-50 pointer-events-none cursor-pointer">
+                    <i class="fab fa-whatsapp text-base"></i> Pedir Gomitas (Mundo Qhea)
+                </button>
+                <button type="button" id="checkout-emilatto-btn" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-4 rounded-xl text-xs transition-all duration-300 shadow-md flex items-center justify-center gap-2 opacity-50 pointer-events-none cursor-pointer">
+                    <i class="fab fa-whatsapp text-base"></i> Pedir Helados (Emilatto)
+                </button>
             </div>
         </div>
     </div>
 
     <!-- Popup: Instalación PWA -->
-    <div id="install-popup" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md flex items-center justify-center z-50 hidden p-4 transition-opacity">
-        <div class="bg-white/95 rounded-3xl shadow-2xl p-6 max-w-sm w-full relative text-slate-700 border border-rose-100">
+    <div id="install-popup" class="fixed inset-0 bg-white/40 backdrop-blur-md flex items-center justify-center z-50 hidden p-4 transition-opacity">
+        <div class="glass-panel rounded-3xl shadow-xl p-6 max-w-sm w-full relative text-slate-700">
             <button type="button" id="close-install-popup-btn" class="absolute top-3 right-4 text-2xl text-slate-400 hover:text-rose-400 transition-colors cursor-pointer">&times;</button>
             
             <div class="text-center mb-5 mt-2">
-                <div class="w-12 h-12 bg-gradient-to-tr from-rose-400 to-pink-400 rounded-full flex items-center justify-center text-white mx-auto mb-3 shadow-sm">
+                <div class="w-12 h-12 bg-gradient-to-tr from-rose-300 to-pink-300 rounded-full flex items-center justify-center text-white mx-auto mb-3 shadow-sm">
                     <i class="fas fa-mobile-alt text-xl"></i>
                 </div>
                 <h3 class="text-2xl font-bold font-logo text-rose-500 tracking-wide">Instalar App</h3>
                 <p class="text-xs text-slate-500 mt-1">Lleva el mundo dulce siempre contigo</p>
             </div>
             
-            <div class="mb-3 bg-rose-50/70 p-4 rounded-2xl border border-rose-100 text-left">
-                <h4 class="font-bold text-sm mb-2 flex items-center text-slate-700"><i class="fab fa-apple mr-2 text-slate-500"></i> En iOS (Safari)</h4>
-                <ol class="list-decimal list-inside text-xs text-slate-600 space-y-2 font-medium">
-                    <li>Toca el botón <strong>Compartir</strong> <i class="fas fa-share-from-square mx-1 text-rose-500"></i>.</li>
+            <div class="mb-3 bg-white/50 p-4 rounded-2xl border border-white">
+                <h4 class="font-bold text-sm mb-2 flex items-center text-slate-600"><i class="fab fa-apple mr-2 text-slate-400"></i> En iOS (Safari)</h4>
+                <ol class="list-decimal list-inside text-xs text-slate-500 space-y-2 font-medium">
+                    <li>Toca el botón <strong>Compartir</strong> <i class="fas fa-share-from-square mx-1"></i>.</li>
                     <li>Desliza hacia arriba y elige <strong class="text-rose-500">"Agregar a inicio"</strong>.</li>
                     <li>Toca en <strong class="text-rose-500">"Agregar"</strong> arriba.</li>
                 </ol>
             </div>
             
-            <div class="bg-rose-50/70 p-4 rounded-2xl border border-rose-100 text-left">
-                <h4 class="font-bold text-sm mb-2 flex items-center text-slate-700"><i class="fab fa-android mr-2 text-green-500"></i> En Android (Chrome)</h4>
-                <ol class="list-decimal list-inside text-xs text-slate-600 space-y-2 font-medium">
-                    <li>Toca los <strong>tres puntos</strong> <i class="fas fa-ellipsis-v mx-1 text-rose-500"></i>.</li>
+            <div class="bg-white/50 p-4 rounded-2xl border border-white">
+                <h4 class="font-bold text-sm mb-2 flex items-center text-slate-600"><i class="fab fa-android mr-2 text-green-500"></i> En Android (Chrome)</h4>
+                <ol class="list-decimal list-inside text-xs text-slate-500 space-y-2 font-medium">
+                    <li>Toca los <strong>tres puntos</strong> <i class="fas fa-ellipsis-v mx-1"></i> arriba a la derecha.</li>
                     <li>Elige <strong class="text-rose-500">"Agregar a la pantalla principal"</strong>.</li>
                     <li>Confirma tocando <strong class="text-rose-500">"Instalar"</strong>.</li>
                 </ol>
@@ -499,36 +424,16 @@
         </div>
     </div>
 
-    <!-- Banner de Invitación a Instalar -->
-    <div id="install-banner" class="fixed bottom-4 left-4 right-4 max-w-sm mx-auto bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-2xl z-50 hidden border border-rose-200 transform translate-y-10 opacity-0 transition-all duration-500 flex items-center justify-between gap-3">
-        <div class="flex items-center gap-3 text-left">
-            <div class="w-10 h-10 bg-rose-500 text-white rounded-xl flex items-center justify-center shrink-0 shadow-sm">
-                <i class="fas fa-gift text-lg"></i>
-            </div>
-            <div>
-                <h4 class="font-bold text-xs text-slate-800">¡Lleva nuestra app contigo!</h4>
-                <p class="text-[11px] text-slate-500 leading-tight">Instálala en tu pantalla de inicio.</p>
-            </div>
-        </div>
-        <div class="flex items-center gap-2 shrink-0">
-            <button type="button" id="accept-install-banner" class="bg-rose-500 hover:bg-rose-600 text-white text-xs font-bold px-3 py-2 rounded-xl transition-all shadow-sm cursor-pointer">Instalar</button>
-            <button type="button" id="close-install-banner" class="text-slate-400 hover:text-slate-600 p-1 cursor-pointer"><i class="fas fa-times"></i></button>
-        </div>
-    </div>
-
     <script>
-        const APP_URL = 'https://soyconectaplus.com/emilatto-mundoqhea/';
-        const PHONE_EMILATTO = '573104362211';
-        const PHONE_QHEA = '573117223559';
+        const AZUCAR_URL = 'https://soyconectaplus.com/emilatto-mundoqhea/';
+        const AZUCAR_LOGO = 'https://i.postimg.cc/prFbsHt8/logo-preview.png';
 
         const openPopup = (popupId) => document.getElementById(popupId)?.classList.remove('hidden');
         const closePopup = (popupId) => document.getElementById(popupId)?.classList.add('hidden');
-        const escapeAttr = (str) => String(str).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
-        const formatCOP = (val) => '$ ' + new Intl.NumberFormat('es-CO').format(val);
 
-        // =====================================================================
-        // CATÁLOGO COMPLETO DE EMILATTO (HELADOS) Y MUNDO QHEA (GOMITAS)
-        // =====================================================================
+        const formatCOP = (amount) => '$ ' + new Intl.NumberFormat('es-CO').format(amount);
+        const escapeAttr = (str) => String(str).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+
         const emilattoSections = [
             {
                 title: "Conchas",
@@ -625,9 +530,14 @@
                 ]
             },
             {
-                title: "Dorilattos & Ensaladas",
+                title: "Dorilattos",
                 items: [
-                    { name: "Dorilattos", price: 20000 },
+                    { name: "Dorilattos", price: 20000 }
+                ]
+            },
+            {
+                title: "Ensaladas",
+                items: [
                     { name: "Ensalada Pequeña", price: 20000 },
                     { name: "Ensalada Mediana", price: 24000 },
                     { name: "Ensalada Grande", price: 27000 }
@@ -659,16 +569,16 @@
                 ]
             },
             {
-                title: "Adicionales & Empaque",
+                title: "Importante",
                 items: [
-                    { name: "Domicilio Emilatto", price: 3000 },
+                    { name: "Domicilios", price: 3000 },
                     { name: "Bowl Empaque", price: 2000 },
-                    { name: "Bola de Helado Adicional", price: 2000 }
+                    { name: "Bola de Helado", price: 2000 }
                 ]
             }
         ];
 
-        const qheaItems = [
+        const gomitasItems = [
             { name: "Cono de gomitas", price: 30000, desc: "", img: "https://i.postimg.cc/50Pz7Hk6/Whats-App-Image-2026-11-11-at-9-09-24-PM.jpg" },
             { name: "Torta de gomitas", price: 65000, desc: "1 kg de gomitas surtidas 🌈", img: "https://i.postimg.cc/q7JgPJK2/Whats-App-Image-2026-11-12-at-9-12-35-PM-(1).jpg" },
             { name: "Mini torta", price: 30000, desc: "", img: "https://i.postimg.cc/0Q3GfWQf/Whats-App-Image-2026-11-11-at-9-15-21-PM.jpg" },
@@ -686,41 +596,48 @@
             { name: "Te quiero dulce", price: 50000, desc: "Empaque corazón 5 compartimientos", img: "https://i.postimg.cc/xTPTH4x0/Whats-App-Image-2026-11-13-at-8-11-53-PM.jpg" }
         ];
 
-        // Renderizar Emilatto
-        const emilattoContainer = document.getElementById('emilatto-menu-container');
-        if (emilattoContainer) {
-            const emilattoLogo = "https://i.postimg.cc/DyC8JzyC/Whats-App-Image-2026-11-14-at-12-05-19-AM.jpg";
-            emilattoContainer.innerHTML = emilattoSections.map(sec => `
-                <div class="mb-6">
-                    <h3 class="font-logo text-2xl text-green-600 mb-3 border-b border-green-100 pb-1 text-left">${sec.title}</h3>
+        const renderEmilatto = () => {
+            const container = document.getElementById('helados-menu-container');
+            if (!container) return;
+            container.innerHTML = emilattoSections.map(sec => `
+                <div>
+                    <h3 class="font-logo text-2xl text-rose-400 mb-3 border-b border-rose-100 pb-1">${sec.title}</h3>
                     <div class="grid grid-cols-1 gap-2">
                         ${sec.items.map(item => {
                             const safeName = escapeAttr(item.name);
+                            const waMsg = encodeURIComponent(`¡Hola! Quiero pedir ${item.name} (${formatCOP(item.price)}).`);
                             return `
-                                <div class="bg-white/80 rounded-2xl p-3 border border-green-100 shadow-sm flex justify-between items-center text-left">
-                                    <div>
+                                <div class="bg-white/65 rounded-2xl p-3 border border-white/50 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                                    <div class="text-left">
                                         <h4 class="font-bold text-[15px] text-slate-700 leading-tight">${item.name}</h4>
-                                        <p class="text-green-600 font-bold mt-0.5 text-sm">${formatCOP(item.price)}</p>
+                                        <p class="text-rose-500 font-bold mt-0.5 text-sm">${formatCOP(item.price)}</p>
                                     </div>
-                                    <button type="button" onclick="addToCart('${safeName}', ${item.price}, '${emilattoLogo}', 'Emilatto')" class="bg-green-500 hover:bg-green-600 text-white w-9 h-9 flex items-center justify-center rounded-xl transition-transform hover:scale-110 shadow-sm shrink-0 cursor-pointer" title="Agregar al pedido">
-                                        <i class="fas fa-plus text-sm"></i>
-                                    </button>
+                                    <div class="flex items-center gap-1.5 shrink-0">
+                                        <button type="button" onclick="addToCart('${safeName}', ${item.price}, 'https://i.postimg.cc/DyC8JzyC/Whats-App-Image-2026-11-14-at-12-05-19-AM.jpg', 'Emilatto')" class="bg-emerald-100 text-emerald-700 w-9 h-9 flex items-center justify-center rounded-full hover:bg-emerald-500 hover:text-white transition-colors shadow-sm cursor-pointer" title="Agregar al carrito">
+                                            <i class="fas fa-cart-plus text-sm"></i>
+                                        </button>
+                                        <a href="https://wa.me/573104362211?text=${waMsg}" target="_blank" rel="noopener noreferrer" class="bg-rose-100 text-rose-500 w-9 h-9 flex items-center justify-center rounded-full hover:bg-rose-400 hover:text-white transition-colors shadow-sm" title="Pedir rápido">
+                                            <i class="fab fa-whatsapp text-lg"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             `;
                         }).join('')}
                     </div>
                 </div>
             `).join('');
-        }
+        };
 
-        // Renderizar Mundo Qhea
-        const qheaContainer = document.getElementById('qhea-menu-container');
-        if (qheaContainer) {
-            qheaContainer.innerHTML = qheaItems.map(item => {
+        const renderGomitas = () => {
+            const container = document.getElementById('gomitas-menu-container');
+            if (!container) return;
+            container.innerHTML = gomitasItems.map(item => {
                 const safeName = escapeAttr(item.name);
+                const safeImg = escapeAttr(item.img);
+                const waMsg = encodeURIComponent(`¡Hola! Quiero pedir ${item.name} (${formatCOP(item.price)}).`);
                 return `
-                    <div class="bg-white/80 rounded-2xl p-3 border border-pink-100 shadow-sm flex justify-between items-center gap-2 text-left">
-                        <div class="flex items-center gap-3">
+                    <div class="bg-white/65 rounded-2xl p-3 border border-white/50 shadow-sm flex justify-between items-center backdrop-blur-sm">
+                        <div class="flex items-center gap-3 text-left">
                             <img src="${item.img}" alt="${item.name}" class="w-16 h-16 rounded-xl object-cover shadow-sm border border-white shrink-0">
                             <div>
                                 <h4 class="font-bold text-base text-slate-800 leading-tight">${item.name}</h4>
@@ -728,87 +645,70 @@
                                 <p class="text-pink-500 font-bold mt-0.5 text-sm">${formatCOP(item.price)}</p>
                             </div>
                         </div>
-                        <button type="button" onclick="addToCart('${safeName}', ${item.price}, '${item.img}', 'Mundo Qhea')" class="bg-pink-500 hover:bg-pink-600 text-white w-9 h-9 flex items-center justify-center rounded-xl transition-transform hover:scale-110 shadow-sm shrink-0 cursor-pointer" title="Agregar al carrito">
-                            <i class="fas fa-plus text-sm"></i>
-                        </button>
+                        <div class="flex items-center gap-1.5 shrink-0">
+                            <button type="button" onclick="addToCart('${safeName}', ${item.price}, '${safeImg}', 'Mundo Qhea')" class="bg-pink-50 text-pink-400 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm cursor-pointer" title="Agregar al carrito">
+                                <i class="fas fa-cart-plus text-sm"></i>
+                            </button>
+                            <a href="https://wa.me/573117223559?text=${waMsg}" target="_blank" rel="noopener noreferrer" class="bg-pink-100 text-pink-500 w-9 h-9 flex items-center justify-center rounded-full hover:bg-pink-400 hover:text-white transition-colors shadow-sm" title="Pedir rápido">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                            </a>
+                        </div>
                     </div>
                 `;
             }).join('');
-        }
+        };
 
-        // =====================================================================
-        // PWA INSTALL LOGIC
-        // =====================================================================
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-        });
+        renderEmilatto();
+        renderGomitas();
 
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const banner = document.getElementById('install-banner');
-                if (banner && !localStorage.getItem('install_prompt_closed')) {
-                    banner.classList.remove('hidden');
-                    setTimeout(() => banner.classList.remove('translate-y-10', 'opacity-0'), 50);
-                }
-            }, 2000);
-        });
-
-        document.getElementById('accept-install-banner')?.addEventListener('click', async () => {
-            document.getElementById('install-banner').classList.add('hidden');
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                await deferredPrompt.userChoice;
-                deferredPrompt = null;
-            } else {
-                openPopup('install-popup');
-            }
-        });
-
-        document.getElementById('close-install-banner')?.addEventListener('click', () => {
-            const banner = document.getElementById('install-banner');
-            banner.classList.add('opacity-0', 'translate-y-10');
-            setTimeout(() => banner.classList.add('hidden'), 500);
-            localStorage.setItem('install_prompt_closed', 'true');
-        });
-
-        // =====================================================================
-        // COMPARTIR / QR CON NUEVO DOMINIO
-        // =====================================================================
+        // Compartir / QR
         const shareBtn = document.getElementById('share-btn');
+        const sharePopup = 'share-popup';
         const qrcodeContainer = document.getElementById('qrcode-container');
         const shareUrlInput = document.getElementById('share-url');
         
         shareBtn?.addEventListener('click', () => {
-            const url = APP_URL;
-            shareUrlInput.value = url;
+            const currentUrl = window.location.href.startsWith('http') ? window.location.href.split('#')[0] : AZUCAR_URL;
+            shareUrlInput.value = currentUrl;
             
             shareUrlInput.onclick = () => {
                 shareUrlInput.select();
-                navigator.clipboard?.writeText(url).then(() => {
-                    const originalValue = shareUrlInput.value;
-                    shareUrlInput.value = "¡Enlace copiado!";
-                    setTimeout(() => shareUrlInput.value = originalValue, 2000);
-                }).catch(() => document.execCommand('copy'));
+                if (navigator.clipboard?.writeText) {
+                    navigator.clipboard.writeText(currentUrl).then(() => {
+                        const originalValue = shareUrlInput.value;
+                        shareUrlInput.value = "¡Enlace copiado!";
+                        setTimeout(() => shareUrlInput.value = originalValue, 2000);
+                    }).catch(() => document.execCommand('copy'));
+                } else {
+                    document.execCommand('copy');
+                }
             };
 
             qrcodeContainer.innerHTML = '';
             if (typeof QRCode === 'function') {
                 new QRCode(qrcodeContainer, {
-                    text: url, width: 150, height: 150,
-                    colorDark : "#f43f5e", colorLight : "#ffffff",
-                    correctLevel : QRCode.CorrectLevel.H
+                    text: currentUrl,
+                    width: 150,
+                    height: 150,
+                    colorDark: "#f43f5e",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H
                 });
             }
-            openPopup('share-popup');
+            openPopup(sharePopup);
         });
-        document.getElementById('close-share-popup-btn')?.addEventListener('click', () => closePopup('share-popup'));
+        document.getElementById('close-share-popup-btn')?.addEventListener('click', () => closePopup(sharePopup));
         
         ['helados', 'gomitas'].forEach(cat => {
             document.getElementById(`${cat}-btn`)?.addEventListener('click', () => openPopup(`${cat}-popup`));
             document.getElementById(`close-${cat}-popup-btn`)?.addEventListener('click', () => closePopup(`${cat}-popup`));
         });
+
+        document.getElementById('open-cart-btn')?.addEventListener('click', () => {
+            openPopup('cart-popup');
+            updateCartUI();
+        });
+        document.getElementById('close-cart-popup-btn')?.addEventListener('click', () => closePopup('cart-popup'));
 
         ['share-popup', 'helados-popup', 'gomitas-popup', 'install-popup', 'cart-popup'].forEach(id => {
             document.getElementById(id)?.addEventListener('click', (e) => {
@@ -816,35 +716,10 @@
             });
         });
 
-        // =====================================================================
-        // CARRITO DE COMPRAS UNIFICADO (EMILATTO + MUNDO QHEA)
-        // =====================================================================
+        // Carrito de Compras
         let cart = [];
-        let deliveryMode = 'Domicilio';
 
-        const toast = document.getElementById('toast');
-        const toastMsg = document.getElementById('toast-msg');
-
-        const showToast = (itemName) => {
-            toastMsg.innerText = `1x ${itemName} agregado`;
-            toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-[-20px]');
-            toast.classList.add('opacity-100', 'translate-y-0');
-            setTimeout(() => {
-                toast.classList.remove('opacity-100', 'translate-y-0');
-                toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-[-20px]');
-            }, 2000);
-        };
-
-        window.openCartModal = () => {
-            updateCartUI();
-            openPopup('cart-popup');
-        };
-
-        document.getElementById('main-order-btn')?.addEventListener('click', openCartModal);
-        document.getElementById('floating-cart-btn')?.addEventListener('click', openCartModal);
-        document.getElementById('close-cart-popup-btn')?.addEventListener('click', () => closePopup('cart-popup'));
-
-        window.addToCart = function(name, price, image, brand) {
+        window.addToCart = function(name, price, image, brand = 'Mundo Qhea') {
             const existing = cart.find(item => item.name === name && item.brand === brand);
             if (existing) {
                 existing.qty++;
@@ -852,7 +727,67 @@
                 cart.push({ name, price, image, brand, qty: 1 });
             }
             updateCartUI();
-            showToast(name);
+            const cartBadge = document.getElementById('cart-badge');
+            if (cartBadge) {
+                cartBadge.classList.add('scale-150');
+                setTimeout(() => cartBadge.classList.remove('scale-150'), 200);
+            }
+        };
+
+        window.updateCartUI = function() {
+            const count = cart.reduce((acc, item) => acc + item.qty, 0);
+            document.querySelectorAll('.cart-badge-count').forEach(badge => {
+                badge.innerText = count;
+                if (count > 0) badge.classList.remove('hidden');
+                else badge.classList.add('hidden');
+            });
+
+            const itemsContainer = document.getElementById('cart-items');
+            const totalContainer = document.getElementById('cart-total');
+            const checkoutQheaBtn = document.getElementById('checkout-qhea-btn');
+            const checkoutEmilattoBtn = document.getElementById('checkout-emilatto-btn');
+            const deliveryBox = document.getElementById('cart-delivery-details');
+            
+            if (cart.length === 0) {
+                if (itemsContainer) itemsContainer.innerHTML = '<p class="text-center text-slate-400 text-sm py-8 font-medium"><i class="fas fa-box-open block text-3xl mb-3 text-slate-300"></i> Tu carrito está vacío 🍬</p>';
+                if (totalContainer) totalContainer.innerText = '$ 0';
+                if (deliveryBox) deliveryBox.classList.add('hidden');
+                [checkoutQheaBtn, checkoutEmilattoBtn].forEach(btn => {
+                    btn?.classList.add('opacity-50', 'pointer-events-none');
+                });
+                return;
+            }
+
+            if (deliveryBox) deliveryBox.classList.remove('hidden');
+            [checkoutQheaBtn, checkoutEmilattoBtn].forEach(btn => {
+                btn?.classList.remove('opacity-50', 'pointer-events-none');
+            });
+            
+            let html = '';
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.price * item.qty;
+                html += `
+                <div class="flex items-center justify-between bg-white/80 p-2.5 rounded-xl border border-white shadow-sm mb-2">
+                    <div class="flex items-center gap-3 text-left">
+                        <img src="${item.image}" class="w-12 h-12 rounded-lg object-cover shadow-sm shrink-0">
+                        <div>
+                            <span class="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-rose-50 text-rose-500">${item.brand}</span>
+                            <h5 class="text-xs font-bold text-slate-700 leading-tight mt-0.5">${item.name}</h5>
+                            <p class="text-[11px] text-pink-500 font-bold mt-0.5">${formatCOP(item.price * item.qty)}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 bg-pink-50 rounded-lg px-1.5 py-0.5 shadow-inner border border-pink-100 shrink-0">
+                        <button type="button" onclick="updateQty(${index}, -1)" class="w-6 h-6 text-pink-400 hover:text-pink-600 flex items-center justify-center font-bold text-lg leading-none cursor-pointer">-</button>
+                        <span class="text-xs font-bold w-4 text-center text-slate-600">${item.qty}</span>
+                        <button type="button" onclick="updateQty(${index}, 1)" class="w-6 h-6 text-pink-400 hover:text-pink-600 flex items-center justify-center font-bold text-lg leading-none cursor-pointer">+</button>
+                    </div>
+                </div>`;
+            });
+            
+            if (itemsContainer) itemsContainer.innerHTML = html;
+            if (totalContainer) totalContainer.innerText = formatCOP(total);
+            updateCartButtons(total);
         };
 
         window.updateQty = function(index, delta) {
@@ -863,155 +798,52 @@
             updateCartUI();
         };
 
-        window.clearCart = function() {
-            cart = [];
-            updateCartUI();
-        };
-
-        window.setDeliveryMode = function(mode) {
-            deliveryMode = mode;
-            const btnDom = document.getElementById('btn-mode-domicilio');
-            const btnRec = document.getElementById('btn-mode-recoger');
-            const addrContainer = document.getElementById('address-field-container');
-
-            if (mode === 'Domicilio') {
-                btnDom.className = "py-2 px-2 rounded-xl text-xs font-bold border border-rose-400 bg-rose-500 text-white flex items-center justify-center gap-1.5 transition-all cursor-pointer";
-                btnRec.className = "py-2 px-2 rounded-xl text-xs font-bold border border-rose-200 bg-white text-slate-600 flex items-center justify-center gap-1.5 transition-all cursor-pointer";
-                addrContainer.classList.remove('hidden');
-            } else {
-                btnRec.className = "py-2 px-2 rounded-xl text-xs font-bold border border-rose-400 bg-rose-500 text-white flex items-center justify-center gap-1.5 transition-all cursor-pointer";
-                btnDom.className = "py-2 px-2 rounded-xl text-xs font-bold border border-rose-200 bg-white text-slate-600 flex items-center justify-center gap-1.5 transition-all cursor-pointer";
-                addrContainer.classList.add('hidden');
-            }
-            renderCheckoutActions();
-        };
-
-        window.renderCheckoutActions = function() {
-            const container = document.getElementById('checkout-buttons-container');
-            if (!container) return;
-
-            if (cart.length === 0) {
-                container.innerHTML = '';
-                return;
-            }
-
-            const customerName = document.getElementById('customer-name')?.value.trim() || '';
-            const address = document.getElementById('order-address')?.value.trim() || '';
-            const payment = document.getElementById('order-payment')?.value || 'Efectivo';
-            const notes = document.getElementById('order-notes')?.value.trim() || '';
-
-            const buildMessage = (brandLabel, emoji, itemsList) => {
-                let subtotal = 0;
-                let text = `¡Hola *${brandLabel}*! ${emoji} Quisiera hacer el siguiente pedido:\n\n`;
-                itemsList.forEach(item => {
-                    const lineTotal = item.price * item.qty;
-                    subtotal += lineTotal;
-                    text += `▪️ *${item.qty}x* ${item.name} — ${formatCOP(lineTotal)}\n`;
-                });
-                text += `\n💰 *Total:* ${formatCOP(subtotal)}\n`;
-                if (customerName) text += `👤 *Nombre:* ${customerName}\n`;
-                text += `🛵 *Modalidad:* ${deliveryMode}\n`;
-                if (deliveryMode === 'Domicilio') {
-                    text += `📍 *Dirección:* ${address || 'Por confirmar'}\n`;
-                }
-                text += `💳 *Método de pago:* ${payment}\n`;
-                if (notes) text += `📝 *Notas:* ${notes}\n`;
-                return encodeURIComponent(text);
-            };
-
-            const emilattoItems = cart.filter(i => i.brand === 'Emilatto');
-            const qheaItemsCart = cart.filter(i => i.brand === 'Mundo Qhea');
-
-            let buttonsHtml = '';
-
-            if (emilattoItems.length > 0) {
-                const msg = buildMessage('Emilatto', '🍨', emilattoItems);
-                buttonsHtml += `
-                    <a href="https://wa.me/${PHONE_EMILATTO}?text=${msg}" target="_blank" rel="noopener noreferrer" class="w-full bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold py-3 px-4 rounded-xl text-xs sm:text-sm transition-all hover:brightness-105 shadow-md flex items-center justify-center gap-2">
-                        <i class="fab fa-whatsapp text-lg"></i> Enviar Helados Emilatto (310 436 2211)
-                    </a>
-                `;
-            }
-
-            if (qheaItemsCart.length > 0) {
-                const msg = buildMessage('Mundo Qhea', '🍬', qheaItemsCart);
-                buttonsHtml += `
-                    <a href="https://wa.me/${PHONE_QHEA}?text=${msg}" target="_blank" rel="noopener noreferrer" class="w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold py-3 px-4 rounded-xl text-xs sm:text-sm transition-all hover:brightness-105 shadow-md flex items-center justify-center gap-2">
-                        <i class="fab fa-whatsapp text-lg"></i> Enviar Gomitas Mundo Qhea (311 722 3559)
-                    </a>
-                `;
-            }
-
-            container.innerHTML = buttonsHtml;
-        };
-
-        window.updateCartUI = function() {
-            const count = cart.reduce((acc, item) => acc + item.qty, 0);
-            
-            document.querySelectorAll('.cart-badge, .cart-badge-inline, .cart-badge-mini').forEach(badge => {
-                badge.innerText = count;
-                if (count > 0) badge.classList.remove('hidden');
-                else badge.classList.add('hidden');
+        const buildOrderMessage = (brandLabel, total) => {
+            const address = document.getElementById('sweet-address')?.value.trim() || '';
+            const notes = document.getElementById('sweet-notes')?.value.trim() || '';
+            let text = `¡Hola! Quisiera hacer el siguiente pedido en *Que hable el azúcar* (${brandLabel}):\n\n`;
+            cart.forEach(item => {
+                text += `🍬 *${item.qty}x* ${item.name} (${formatCOP(item.price * item.qty)})\n`;
             });
-
-            const itemsContainer = document.getElementById('cart-items');
-            const totalContainer = document.getElementById('cart-total');
-            const totalBox = document.getElementById('cart-total-box');
-            const clearBtn = document.getElementById('clear-cart-btn');
-            const deliveryForm = document.getElementById('delivery-form');
-            
-            if (cart.length === 0) {
-                if (itemsContainer) itemsContainer.innerHTML = '<p class="text-center text-slate-400 text-sm py-8 font-medium"><i class="fas fa-box-open block text-3xl mb-3 text-slate-300"></i> Tu carrito está vacío 🍬🍨</p>';
-                if (totalContainer) totalContainer.innerText = '$ 0';
-                totalBox?.classList.add('hidden');
-                clearBtn?.classList.add('hidden');
-                deliveryForm?.classList.add('hidden');
-                renderCheckoutActions();
-                return;
-            }
-
-            totalBox?.classList.remove('hidden');
-            clearBtn?.classList.remove('hidden');
-            deliveryForm?.classList.remove('hidden');
-            
-            let html = '';
-            let total = 0;
-            cart.forEach((item, index) => {
-                total += item.price * item.qty;
-                const tagColor = item.brand === 'Emilatto' ? 'bg-green-100 text-green-700' : 'bg-pink-100 text-pink-600';
-                html += `
-                <div class="flex items-center justify-between bg-rose-50/50 p-2.5 rounded-2xl border border-rose-100 shadow-sm">
-                    <div class="flex items-center gap-2.5 text-left pr-2">
-                        <img src="${item.image}" alt="${item.name}" class="w-11 h-11 rounded-xl object-cover shadow-sm shrink-0">
-                        <div>
-                            <span class="text-[9px] font-extrabold uppercase px-2 py-0.5 rounded-full ${tagColor}">${item.brand}</span>
-                            <h5 class="text-xs font-bold text-slate-700 leading-tight mt-0.5">${item.name}</h5>
-                            <p class="text-[11px] text-rose-500 font-bold">${formatCOP(item.price * item.qty)}</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-1.5 bg-white rounded-xl px-1.5 py-1 shadow-inner border border-rose-100 shrink-0">
-                        <button type="button" onclick="updateQty(${index}, -1)" class="w-6 h-6 text-rose-400 hover:text-rose-600 flex items-center justify-center font-bold text-lg leading-none cursor-pointer">-</button>
-                        <span class="text-xs font-bold w-4 text-center text-slate-700">${item.qty}</span>
-                        <button type="button" onclick="updateQty(${index}, 1)" class="w-6 h-6 text-rose-400 hover:text-rose-600 flex items-center justify-center font-bold text-lg leading-none cursor-pointer">+</button>
-                    </div>
-                </div>`;
-            });
-            
-            if (itemsContainer) itemsContainer.innerHTML = html;
-            if (totalContainer) totalContainer.innerText = formatCOP(total);
-            renderCheckoutActions();
+            text += `\n*Total estimado: ${formatCOP(total)}*`;
+            if (address) text += `\n📍 *Dirección:* ${address}`;
+            if (notes) text += `\n📝 *Notas:* ${notes}`;
+            return encodeURIComponent(text);
         };
 
-        // Guardar Contacto (vCard) con nuevo dominio
+        const updateCartButtons = (passedTotal) => {
+            const total = typeof passedTotal === 'number'
+                ? passedTotal
+                : cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+
+            const qheaBtn = document.getElementById('checkout-qhea-btn');
+            const emilattoBtn = document.getElementById('checkout-emilatto-btn');
+
+            if (qheaBtn) {
+                qheaBtn.onclick = () => {
+                    if (cart.length === 0) return;
+                    window.open(`https://wa.me/573117223559?text=${buildOrderMessage('Mundo Qhea', total)}`, '_blank', 'noopener,noreferrer');
+                };
+            }
+
+            if (emilattoBtn) {
+                emilattoBtn.onclick = () => {
+                    if (cart.length === 0) return;
+                    window.open(`https://wa.me/573104362211?text=${buildOrderMessage('Emilatto', total)}`, '_blank', 'noopener,noreferrer');
+                };
+            }
+        };
+
         const saveContactBtn = document.getElementById('save-contact-btn');
-        const vCardData = `BEGIN:VCARD\nVERSION:3.0\nFN:Que hable el azúcar\nORG:Emilatto & Mundo Qhea\nTEL;TYPE=WORK,VOICE:+573117223559\nTEL;TYPE=CELL,VOICE:+573104362211\nURL:${APP_URL}\nEND:VCARD`;
-        saveContactBtn.href = `data:text/vcard;charset=utf-8,${encodeURIComponent(vCardData)}`;
+        if (saveContactBtn) {
+            const vCardData = `BEGIN:VCARD\nVERSION:3.0\nFN:Que hable el azúcar\nORG:Que hable el azúcar (Emilatto & Mundo Qhea)\nTEL;TYPE=WORK,VOICE:+573117223559\nTEL;TYPE=CELL,VOICE:+573104362211\nURL:${AZUCAR_URL}\nEND:VCARD`;
+            saveContactBtn.href = `data:text/vcard;charset=utf-8,${encodeURIComponent(vCardData)}`;
+        }
 
-        // Instalación PWA
-        document.getElementById('install-btn')?.addEventListener('click', (e) => { e.preventDefault(); openPopup('install-popup'); });
+        const installBtn = document.getElementById('install-btn');
+        if (installBtn) installBtn.addEventListener('click', (e) => { e.preventDefault(); openPopup('install-popup'); });
         document.getElementById('close-install-popup-btn')?.addEventListener('click', () => closePopup('install-popup'));
 
-        // Service Worker PWA
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 const swCode = `
