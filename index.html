@@ -1,8 +1,34 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" prefix="og: https://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Meta etiquetas Open Graph y Twitter Card al inicio para vista previa en WhatsApp -->
+    <title>Tarjeta Digital - Que hable el azúcar</title>
+    <meta name="description" content="Dulces historias viajeras. Descubre nuestro delicioso menú de helados Emilatto y gomitas Mundo Qhea.">
+    <meta property="og:site_name" content="Que hable el azúcar">
+    <meta property="og:title" content="Que hable el azúcar - Emilatto & Mundo Qhea">
+    <meta property="og:description" content="Dulces historias viajeras. Descubre nuestro delicioso menú de helados Emilatto y gomitas Mundo Qhea.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://soyconectaplus.com/emilatto-mundoqhea/">
+    <meta property="og:image" content="https://i.postimg.cc/mrDzpszg/Logos-Emilatto-y-Mundo-QHFA.png">
+    <meta property="og:image:secure_url" content="https://i.postimg.cc/mrDzpszg/Logos-Emilatto-y-Mundo-QHFA.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Logo Que hable el azúcar - Emilatto y Mundo Qhea">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Que hable el azúcar - Emilatto & Mundo Qhea">
+    <meta name="twitter:description" content="Dulces historias viajeras. Descubre nuestro delicioso menú de helados Emilatto y gomitas Mundo Qhea.">
+    <meta name="twitter:image" content="https://i.postimg.cc/mrDzpszg/Logos-Emilatto-y-Mundo-QHFA.png">
+
+    <!-- Etiquetas PWA para hacer instalable la web -->
+    <meta name="theme-color" content="#fdfbf7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Que hable el azúcar">
+    <link rel="apple-touch-icon" href="https://i.postimg.cc/mrDzpszg/Logos-Emilatto-y-Mundo-QHFA.png">
 
     <!-- Protección de interfaz y disuasión sin bloquear botones ni campos de texto -->
     <script>
@@ -32,26 +58,6 @@
             });
         })();
     </script>
-    
-    <!-- Etiquetas PWA para hacer instalable la web -->
-    <meta name="theme-color" content="#fdfbf7">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Que hable el azúcar">
-    
-    <!-- Meta etiquetas para vista previa al compartir (WhatsApp, Facebook, etc.) -->
-    <meta property="og:title" content="Que hable el azúcar - Emilatto & Mundo Qhea">
-    <meta property="og:description" content="Dulces historias viajeras. Descubre nuestro delicioso menú de helados Emilatto y gomitas Mundo Qhea.">
-    <meta property="og:image" content="https://i.postimg.cc/mrDzpszg/Logos-Emilatto-y-Mundo-QHFA.png">
-    <meta property="og:image:secure_url" content="https://i.postimg.cc/mrDzpszg/Logos-Emilatto-y-Mundo-QHFA.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:url" content="https://soyconectaplus.com/emilatto-mundoqhea/">
-    <meta property="og:type" content="website">
-    
-    <!-- Ícono para iOS y Android -->
-    <link rel="apple-touch-icon" href="https://i.postimg.cc/mrDzpszg/Logos-Emilatto-y-Mundo-QHFA.png">
 
     <!-- Configuración PWA Nativa -->
     <link rel="manifest" id="manifest-link">
@@ -72,8 +78,6 @@
         };
         document.getElementById('manifest-link').setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(manifest)));
     </script>
-    
-    <title>Tarjeta Digital - Que hable el azúcar</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
